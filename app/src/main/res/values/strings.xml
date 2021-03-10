@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Proyecto_as</string>
+    <string name="login_usuario">LOGIN USUARIO</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">LOGIN</string>
+    <string name="nombre_usuario">Nombre usuario</string>
+    <string name="logo_instituto">logo instituto</string>
+    <string name="login_ok">Login correcto</string>
+    <string name="unknown_user">Usuario desconocido</string>
+    <string name="unregistered_user">Usuario no registrado</string>
+    <string name="unknown_error">Error desconocido</string>
+    <string name="unknown_connection_failure">Fallo desconocido en la conexión</string>
+    <string name="empresa_alumno">Empresa</string>
+    <string name="horas_completadas">Horas completadas</string>
+    <string name="descripcion">Descripción</string>
+    <string name="observaciones">Observaciones</string>
+    <string name="alumno">Alumno</string>
+    <string name="profesor">Profesor</string>
+    <string name="tutor">Tutor</string>
+    <string name="firmas">FIRMAS</string>
+    <string name="no_hay_fichas_disponibles">No hay fichas disponibles</string>
+    <string name="logout">Logout</string>
+    <string name="fichas_presentadas">Fichas Presentadas</string>
+</resources>

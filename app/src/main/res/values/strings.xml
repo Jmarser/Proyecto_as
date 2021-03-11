@@ -22,5 +22,11 @@
     <string name="no_hay_fichas_disponibles">No hay fichas disponibles</string>
     <string name="logout">Logout</string>
     <string name="fichas_presentadas">Fichas Presentadas</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="horas">Horas</string>
+    <string name="firmado">Firmado</string>
+    <string name="_27_06_1979">27/06/1979</string>
+    <string name="fecha">Fecha</string>
 
 </resources>

@@ -1,13 +1,11 @@
 package com.jmarser.proyecto_as.model;
 
-import android.os.Parcel;
-
 import java.util.List;
 
 public class Tutor extends Usuario {
 
     private String empresa;
-    private List<Alumno> alumnos;
+    private List<Alumno> alumnosTutor;
 
     public Tutor() {
         super();
@@ -16,7 +14,7 @@ public class Tutor extends Usuario {
     public Tutor(Long id, String nombre, String primerApellido, String segundoApellido, String email, String empresa, List<Alumno> alumnos) {
         super(id, nombre, primerApellido, segundoApellido, email);
         this.empresa = empresa;
-        this.alumnos = alumnos;
+        this.alumnosTutor = alumnos;
     }
 
     public String getEmpresa() {
@@ -27,12 +25,12 @@ public class Tutor extends Usuario {
         this.empresa = empresa;
     }
 
-    public List<Alumno> getAlumnos() {
-        return alumnos;
+    public List<Alumno> getAlumnosTutor() {
+        return alumnosTutor;
     }
 
-    public void setAlumnos(List<Alumno> alumnos) {
-        this.alumnos = alumnos;
+    public void setAlumnosTutor(List<Alumno> alumnosTutor) {
+        this.alumnosTutor = alumnosTutor;
     }
 
     @Override

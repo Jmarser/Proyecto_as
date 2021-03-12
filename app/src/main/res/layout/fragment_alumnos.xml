@@ -6,8 +6,10 @@
     tools:context=".alumnos.view.AlumnosFragment">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_alumnos"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="5dp"
-        tools:listitem="@layout/alumnos_row"/>
+        tools:listitem="@layout/alumnos_row"
+        android:background="@drawable/degradado_registro"/>
 </FrameLayout>

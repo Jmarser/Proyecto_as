@@ -65,17 +65,18 @@ public class AdaptadorAlumno extends RecyclerView.Adapter<AdaptadorAlumno.Alumno
         }
 
         public void bindData(Alumno alumno){
+            pb_alumno.setMax(Constantes.HORAS_PRACTICAS);
             int horas = 0;
-            int fichas = 0;
+            int fichas = alumno.getFichas().size();
             if(alumno.getFichas()!=null){
-                fichas += alumno.getFichas().size();
                 for(int i = 0; i<alumno.getFichas().size(); i++){
                     horas += alumno.getFichas().get(i).getHoras();
                 }
             }
 
             tv_nombre_alumno.setText(alumno.toString());
-            tv_fichas.setText(fichas);
+            tv_fichas.setText(String.valueOf(fichas));
+            pb_alumno.setProgress(horas);
             tv_total_horas.setText(horas + "/"+ Constantes.HORAS_PRACTICAS);
         }
     }

@@ -1,9 +1,12 @@
 package com.jmarser.proyecto_as.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 import java.util.Date;
 
-public class Ficha implements Serializable {
+public class Ficha implements Parcelable {
 
     private Long id;
     private String descripcion;
@@ -27,6 +30,32 @@ public class Ficha implements Serializable {
         this.horas = horas;
         this.fecha = fecha;
     }
+
+    protected Ficha(Parcel in) {
+        if (in.readByte() == 0) {
+            id = null;
+        } else {
+            id = in.readLong();
+        }
+        descripcion = in.readString();
+        observaciones = in.readString();
+        firmaAlumno = in.readByte() != 0;
+        firmaProf = in.readByte() != 0;
+        firmaTutor = in.readByte() != 0;
+        horas = in.readInt();
+    }
+
+    public static final Creator<Ficha> CREATOR = new Creator<Ficha>() {
+        @Override
+        public Ficha createFromParcel(Parcel in) {
+            return new Ficha(in);
+        }
+
+        @Override
+        public Ficha[] newArray(int size) {
+            return new Ficha[size];
+        }
+    };
 
     public boolean isFirmaAlumno() {
         return firmaAlumno;
@@ -90,5 +119,26 @@ public class Ficha implements Serializable {
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        if (id == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeLong(id);
+        }
+        dest.writeString(descripcion);
+        dest.writeString(observaciones);
+        dest.writeByte((byte) (firmaAlumno ? 1 : 0));
+        dest.writeByte((byte) (firmaProf ? 1 : 0));
+        dest.writeByte((byte) (firmaTutor ? 1 : 0));
+        dest.writeInt(horas);
     }
 }

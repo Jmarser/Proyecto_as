@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,13 +21,13 @@ public class AdaptadorFicha extends RecyclerView.Adapter<AdaptadorFicha.FichaVie
     private List<Ficha> fichas;
     private Context contexto;
     private int posicion;
+    private ItemClickListener itemClickListener;
 
-    public AdaptadorFicha(List<Ficha> fichas, Context contexto) {
+    public AdaptadorFicha(List<Ficha> fichas, Context contexto, ItemClickListener itemClickListener) {
         this.fichas = fichas;
         this.contexto = contexto;
+        this.itemClickListener = itemClickListener;
     }
-
-
 
     @NonNull
     @Override
@@ -37,6 +38,12 @@ public class AdaptadorFicha extends RecyclerView.Adapter<AdaptadorFicha.FichaVie
     @Override
     public void onBindViewHolder(@NonNull FichaViewHolder holder, int position) {
         holder.bindData(fichas.get(position));
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                itemClickListener.onItemClickListener(fichas.get(position));
+            }
+        });
     }
 
     @Override
@@ -46,13 +53,14 @@ public class AdaptadorFicha extends RecyclerView.Adapter<AdaptadorFicha.FichaVie
 
 
     /*clase interna*/
-    class FichaViewHolder extends RecyclerView.ViewHolder{
+    class FichaViewHolder extends RecyclerView.ViewHolder {
 
         private TextView tv_descripcion;
         private TextView tv_observaciones;
         private CheckBox cb_firma_alumno;
         private CheckBox cb_firma_profesor;
         private CheckBox cb_firma_tutor;
+
 
         public FichaViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -61,6 +69,7 @@ public class AdaptadorFicha extends RecyclerView.Adapter<AdaptadorFicha.FichaVie
             cb_firma_alumno = itemView.findViewById(R.id.cb_firma_alumno);
             cb_firma_profesor = itemView.findViewById(R.id.cb_firma_profesor);
             cb_firma_tutor = itemView.findViewById(R.id.cb_firma_tutor);
+
         }
 
         public void bindData(Ficha ficha){
@@ -70,5 +79,11 @@ public class AdaptadorFicha extends RecyclerView.Adapter<AdaptadorFicha.FichaVie
             cb_firma_profesor.setChecked(ficha.isFirmaProf());
             cb_firma_tutor.setChecked(ficha.isFirmaTutor());
         }
+
+    }
+
+    public interface ItemClickListener {
+
+        void onItemClickListener(Ficha ficha);
     }
 }

@@ -17,12 +17,14 @@ import android.widget.TextView;
 import com.jmarser.proyecto_as.R;
 import com.jmarser.proyecto_as.adaptadores.AdaptadorAlumno;
 import com.jmarser.proyecto_as.adaptadores.AdaptadorFicha;
+import com.jmarser.proyecto_as.ficha.view.FichaFragment;
 import com.jmarser.proyecto_as.fichasAlumno.interactor.FichasAlumnoInteractorImpl;
 import com.jmarser.proyecto_as.fichasAlumno.presenter.FichasAlumnoPresenter;
 import com.jmarser.proyecto_as.fichasAlumno.presenter.FichasAlumnoPresenterImpl;
 import com.jmarser.proyecto_as.model.Alumno;
 import com.jmarser.proyecto_as.model.Ficha;
 import com.jmarser.proyecto_as.utils.Constantes;
+import com.jmarser.proyecto_as.utils.NavigationFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +32,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class FichasAlumnoFragment extends Fragment implements FichasAlumnoView {
+public class FichasAlumnoFragment extends Fragment implements FichasAlumnoView, AdaptadorFicha.ItemClickListener {
 
     @BindView(R.id.tv_nombre_alumno_fichas)
     TextView tv_nombre_alumno;
@@ -109,7 +111,12 @@ public class FichasAlumnoFragment extends Fragment implements FichasAlumnoView {
     }
 
     private void initRecycler() {
-        adaptadorFicha = new AdaptadorFicha(alumno.getFichas(), getContext());
+        adaptadorFicha = new AdaptadorFicha(alumno.getFichas(), getContext(), this);
         rv_fichas_alumno.setAdapter(adaptadorFicha);
+    }
+
+    @Override
+    public void onItemClickListener(Ficha ficha) {
+        NavigationFragment.replaceFragment(getActivity().getSupportFragmentManager(), FichaFragment.newInstance(ficha), FichaFragment.class.getName());
     }
 }

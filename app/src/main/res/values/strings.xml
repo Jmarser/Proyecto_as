@@ -30,5 +30,7 @@
     <string name="fecha">Fecha</string>
     <string name="no_hay_alumnos_asignados">No hay alumnos asignados</string>
     <string name="el_alumno_aun_no_tiene_fichas">El alumno aun no tiene fichas</string>
+    <string name="error_al_cargar_el_usuario">Error al cargar el usuario</string>
+    <string name="reintentar">Reintentar</string>
 
 </resources>

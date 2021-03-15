@@ -11,24 +11,30 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.jmarser.proyecto_as.R;
 import com.jmarser.proyecto_as.adaptadores.AdaptadorAlumno;
 import com.jmarser.proyecto_as.alumnos.interactor.AlumnosInteractorImpl;
 import com.jmarser.proyecto_as.alumnos.presenter.AlumnosPresenter;
 import com.jmarser.proyecto_as.alumnos.presenter.AlumnosPresenterImpl;
+import com.jmarser.proyecto_as.fichasAlumno.view.FichasAlumnoFragment;
+import com.jmarser.proyecto_as.model.Alumno;
 import com.jmarser.proyecto_as.model.Profesor;
 import com.jmarser.proyecto_as.model.Tutor;
 import com.jmarser.proyecto_as.mySharedPref.SharedPrefManager;
 import com.jmarser.proyecto_as.utils.Constantes;
+import com.jmarser.proyecto_as.utils.NavigationFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class AlumnosFragment extends Fragment implements AlumnosView {
+public class AlumnosFragment extends Fragment implements AlumnosView, AdaptadorAlumno.ItemClickListener {
 
     @BindView(R.id.rv_alumnos)
     RecyclerView rv_alumnos;
+    @BindView(R.id.tv_empty_alumnos)
+    TextView tv_empty_alumnos;
 
     private AlumnosPresenter presenter;
     private AdaptadorAlumno adapter;
@@ -74,12 +80,25 @@ public class AlumnosFragment extends Fragment implements AlumnosView {
     }
 
     private void initRecycler(){
-        if (rol.equalsIgnoreCase(Constantes.ROL_PROFESOR)) {
-            adapter = new AdaptadorAlumno(profesor.getAlumnosProf(),getContext());
-        } else if (rol.equalsIgnoreCase(Constantes.ROL_TUTOR)) {
-            adapter = new AdaptadorAlumno(tutor.getAlumnosTutor(), getContext());
-        }
-        rv_alumnos.setAdapter(adapter);
+
+            if (rol.equalsIgnoreCase(Constantes.ROL_PROFESOR)) {
+                adapter = new AdaptadorAlumno(profesor.getAlumnosProf(), getContext(), this);
+            } else if (rol.equalsIgnoreCase(Constantes.ROL_TUTOR)) {
+                adapter = new AdaptadorAlumno(tutor.getAlumnosTutor(), getContext(), this);
+            }
+            if(adapter != null) {
+                if (adapter.getItemCount() != 0) {
+                    rv_alumnos.setVisibility(View.VISIBLE);
+                    rv_alumnos.setAdapter(adapter);
+                    tv_empty_alumnos.setVisibility(View.INVISIBLE);
+                }else{
+                    rv_alumnos.setVisibility(View.INVISIBLE);
+                    tv_empty_alumnos.setVisibility(View.VISIBLE);
+                }
+            }else{
+                rv_alumnos.setVisibility(View.INVISIBLE);
+                tv_empty_alumnos.setVisibility(View.VISIBLE);
+            }
     }
 
     @Override
@@ -104,5 +123,10 @@ public class AlumnosFragment extends Fragment implements AlumnosView {
         if(tutor!= null){
             initRecycler();
         }
+    }
+
+    @Override
+    public void onItemClickListener(Alumno alumno) {
+        NavigationFragment.replaceFragment(getActivity().getSupportFragmentManager(), FichasAlumnoFragment.newInstance(alumno), FichasAlumnoFragment.class.getName());
     }
 }

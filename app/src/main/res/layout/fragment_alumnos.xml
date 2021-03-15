@@ -12,4 +12,15 @@
         android:padding="5dp"
         tools:listitem="@layout/alumnos_row"
         android:background="@drawable/degradado_registro"/>
+
+    <TextView
+        android:id="@+id/tv_empty_alumnos"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:gravity="center"
+        android:text="@string/no_hay_alumnos_asignados"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:visibility="invisible" />
 </FrameLayout>

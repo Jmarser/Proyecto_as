@@ -1,9 +1,11 @@
 package com.jmarser.proyecto_as.model;
 
 
+import android.os.Parcelable;
+
 import java.util.List;
 
-public class Alumno extends Usuario {
+public class Alumno extends Usuario implements Parcelable {
 
     private String ciclo;
     private Profesor profesor;

@@ -28,5 +28,7 @@
     <string name="firmado">Firmado</string>
     <string name="_27_06_1979">27/06/1979</string>
     <string name="fecha">Fecha</string>
+    <string name="no_hay_alumnos_asignados">No hay alumnos asignados</string>
+    <string name="el_alumno_aun_no_tiene_fichas">El alumno aun no tiene fichas</string>
 
 </resources>

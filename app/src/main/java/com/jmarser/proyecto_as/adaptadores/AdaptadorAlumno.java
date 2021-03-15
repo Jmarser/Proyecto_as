@@ -6,16 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.jmarser.proyecto_as.R;
 import com.jmarser.proyecto_as.model.Alumno;
 import com.jmarser.proyecto_as.utils.Constantes;
-
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -24,10 +20,12 @@ public class AdaptadorAlumno extends RecyclerView.Adapter<AdaptadorAlumno.Alumno
     private List<Alumno>  alumnos;
     private Context context;
     private int posicion;
+    private ItemClickListener itemClickListener;
 
-    public AdaptadorAlumno(List<Alumno> alumnos, Context context) {
+    public AdaptadorAlumno(List<Alumno> alumnos, Context context, ItemClickListener itemClickListener) {
         this.alumnos = alumnos;
         this.context = context;
+        this.itemClickListener = itemClickListener;
     }
 
     @NonNull
@@ -39,6 +37,12 @@ public class AdaptadorAlumno extends RecyclerView.Adapter<AdaptadorAlumno.Alumno
     @Override
     public void onBindViewHolder(@NonNull AlumnoViewHolder holder, int position) {
         holder.bindData(alumnos.get(position));
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                itemClickListener.onItemClickListener(alumnos.get(position));
+            }
+        });
     }
 
     @Override
@@ -67,10 +71,13 @@ public class AdaptadorAlumno extends RecyclerView.Adapter<AdaptadorAlumno.Alumno
         public void bindData(Alumno alumno){
             pb_alumno.setMax(Constantes.HORAS_PRACTICAS);
             int horas = 0;
-            int fichas = alumno.getFichas().size();
+            int fichas = 0;
             if(alumno.getFichas()!=null){
-                for(int i = 0; i<alumno.getFichas().size(); i++){
-                    horas += alumno.getFichas().get(i).getHoras();
+                if(alumno.getFichas().size() > 0) {
+                    fichas = alumno.getFichas().size();
+                    for (int i = 0; i < alumno.getFichas().size(); i++) {
+                        horas += alumno.getFichas().get(i).getHoras();
+                    }
                 }
             }
 
@@ -79,5 +86,10 @@ public class AdaptadorAlumno extends RecyclerView.Adapter<AdaptadorAlumno.Alumno
             pb_alumno.setProgress(horas);
             tv_total_horas.setText(horas + "/"+ Constantes.HORAS_PRACTICAS);
         }
+    }
+
+    public interface ItemClickListener {
+
+        void onItemClickListener(Alumno alumno);
     }
 }

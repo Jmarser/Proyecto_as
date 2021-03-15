@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 import com.jmarser.proyecto_as.R;
 import com.jmarser.proyecto_as.alumnos.view.AlumnosFragment;
+import com.jmarser.proyecto_as.errorUsuario.ErrorUsuarioFragment;
 import com.jmarser.proyecto_as.fichasAlumno.view.FichasAlumnoFragment;
 import com.jmarser.proyecto_as.login.view.LoginActivity;
 import com.jmarser.proyecto_as.mySharedPref.SharedPrefManager;
@@ -61,7 +62,7 @@ public class PrincipalActivity extends AppCompatActivity {
     private void initFragment(String rol) {
         if (rol.equalsIgnoreCase(Constantes.ROL_ALUMNO)) {
             getSupportActionBar().setTitle("ALUMNO");
-            NavigationFragment.addFragment(getSupportFragmentManager(), FichasAlumnoFragment.newInstance(), FichasAlumnoFragment.class.getName());
+            NavigationFragment.addFragment(getSupportFragmentManager(), FichasAlumnoFragment.newInstance(null), FichasAlumnoFragment.class.getName());
         } else if (rol.equalsIgnoreCase(Constantes.ROL_PROFESOR)) {
             getSupportActionBar().setTitle("PROFESOR");
             NavigationFragment.addFragment(getSupportFragmentManager(), AlumnosFragment.newInstance(), AlumnosFragment.class.getName());
@@ -69,7 +70,7 @@ public class PrincipalActivity extends AppCompatActivity {
             getSupportActionBar().setTitle("TUTOR");
             NavigationFragment.addFragment(getSupportFragmentManager(), AlumnosFragment.newInstance(), AlumnosFragment.class.getName());
         }else{
-
+            NavigationFragment.addFragment(getSupportFragmentManager(), ErrorUsuarioFragment.newInstance(), ErrorUsuarioFragment.class.getName());
         }
     }
 

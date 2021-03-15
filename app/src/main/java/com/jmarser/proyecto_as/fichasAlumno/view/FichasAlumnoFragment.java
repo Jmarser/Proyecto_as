@@ -42,6 +42,8 @@ public class FichasAlumnoFragment extends Fragment implements FichasAlumnoView, 
     TextView tv_horas_totales;
     @BindView(R.id.rv_fichas_alumno)
     RecyclerView rv_fichas_alumno;
+    @BindView(R.id.tv_empty_fichas)
+    TextView tv_empty_fichas;
 
 
 
@@ -53,15 +55,20 @@ public class FichasAlumnoFragment extends Fragment implements FichasAlumnoView, 
         // Required empty public constructor
     }
 
-    public static FichasAlumnoFragment newInstance() {
+    public static FichasAlumnoFragment newInstance(Alumno alumno) {
         FichasAlumnoFragment fragment = new FichasAlumnoFragment();
-
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("alumno", alumno);
+        fragment.setArguments(bundle);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(getArguments() != null){
+            alumno = getArguments().getParcelable("alumno");
+        }
 
     }
 
@@ -70,13 +77,15 @@ public class FichasAlumnoFragment extends Fragment implements FichasAlumnoView, 
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_fichas_alumno, container, false);
-
-        //rv_fichas_alumno = view.findViewById(R.id.rv_fichas_alumno);
         ButterKnife.bind(this, view);
 
         presenter = new FichasAlumnoPresenterImpl(this, new FichasAlumnoInteractorImpl(getContext()), getContext());
-        presenter.getAlumno();
-
+        if(alumno == null) {
+            presenter.getAlumno();
+        }else{
+            initView();
+            initRecycler();
+        }
         return view;
     }
 
@@ -103,8 +112,10 @@ public class FichasAlumnoFragment extends Fragment implements FichasAlumnoView, 
         pb_horas_alumno.setMax(Constantes.HORAS_PRACTICAS);
         tv_nombre_alumno.setText(alumno.toString());
         int horas = 0;
-        for(int i = 0; i<alumno.getFichas().size(); i++){
-            horas += alumno.getFichas().get(i).getHoras();
+        if(alumno.getFichas().size() > 0) {
+            for (int i = 0; i < alumno.getFichas().size(); i++) {
+                horas += alumno.getFichas().get(i).getHoras();
+            }
         }
         pb_horas_alumno.setProgress(horas);
         tv_horas_totales.setText(horas + "/" + Constantes.HORAS_PRACTICAS);
@@ -112,7 +123,19 @@ public class FichasAlumnoFragment extends Fragment implements FichasAlumnoView, 
 
     private void initRecycler() {
         adaptadorFicha = new AdaptadorFicha(alumno.getFichas(), getContext(), this);
-        rv_fichas_alumno.setAdapter(adaptadorFicha);
+        if(adaptadorFicha != null) {
+            if(adaptadorFicha.getItemCount() > 0) {
+                rv_fichas_alumno.setVisibility(View.VISIBLE);
+                rv_fichas_alumno.setAdapter(adaptadorFicha);
+                tv_empty_fichas.setVisibility(View.INVISIBLE);
+            }else{
+                rv_fichas_alumno.setVisibility(View.INVISIBLE);
+                tv_empty_fichas.setVisibility(View.VISIBLE);
+            }
+        }else{
+            rv_fichas_alumno.setVisibility(View.INVISIBLE);
+            tv_empty_fichas.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

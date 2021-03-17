@@ -11,22 +11,24 @@ public class Ficha implements Parcelable {
     private Long id;
     private String descripcion;
     private String observaciones;
+    private Long alumnoId;
     private boolean firmaAlumno;
     private boolean firmaProf;
     private boolean firmaTutor;
     private int horas;
-    private Date fecha;
+    private String fecha;
 
     public Ficha() {
     }
 
-    public Ficha(Long id, String descripcion, String observaciones, boolean firma_alumno, boolean firma_profesor, boolean firma_tutor, int horas, Date fecha) {
+    public Ficha(Long id, String descripcion, String observaciones, Long alumnoId, boolean firmaAlumno, boolean firmaProf, boolean firmaTutor, int horas, String fecha) {
         this.id = id;
         this.descripcion = descripcion;
         this.observaciones = observaciones;
-        this.firmaAlumno = firma_alumno;
-        this.firmaProf = firma_profesor;
-        this.firmaTutor = firma_tutor;
+        this.alumnoId = alumnoId;
+        this.firmaAlumno = firmaAlumno;
+        this.firmaProf = firmaProf;
+        this.firmaTutor = firmaTutor;
         this.horas = horas;
         this.fecha = fecha;
     }
@@ -39,10 +41,16 @@ public class Ficha implements Parcelable {
         }
         descripcion = in.readString();
         observaciones = in.readString();
+        if (in.readByte() == 0) {
+            alumnoId = null;
+        } else {
+            alumnoId = in.readLong();
+        }
         firmaAlumno = in.readByte() != 0;
         firmaProf = in.readByte() != 0;
         firmaTutor = in.readByte() != 0;
         horas = in.readInt();
+        fecha = in.readString();
     }
 
     public static final Creator<Ficha> CREATOR = new Creator<Ficha>() {
@@ -113,11 +121,11 @@ public class Ficha implements Parcelable {
         this.horas = horas;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 
@@ -128,6 +136,7 @@ public class Ficha implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+
         if (id == null) {
             dest.writeByte((byte) 0);
         } else {
@@ -136,9 +145,24 @@ public class Ficha implements Parcelable {
         }
         dest.writeString(descripcion);
         dest.writeString(observaciones);
+        if (alumnoId == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeLong(alumnoId);
+        }
         dest.writeByte((byte) (firmaAlumno ? 1 : 0));
         dest.writeByte((byte) (firmaProf ? 1 : 0));
         dest.writeByte((byte) (firmaTutor ? 1 : 0));
         dest.writeInt(horas);
+        dest.writeString(fecha);
+    }
+
+    public Long getAlumnoId() {
+        return alumnoId;
+    }
+
+    public void setAlumnoId(Long alumnoId) {
+        this.alumnoId = alumnoId;
     }
 }

@@ -19,7 +19,6 @@ public class AdaptadorAlumno extends RecyclerView.Adapter<AdaptadorAlumno.Alumno
 
     private List<Alumno>  alumnos;
     private Context context;
-    private int posicion;
     private ItemClickListener itemClickListener;
 
     public AdaptadorAlumno(List<Alumno> alumnos, Context context, ItemClickListener itemClickListener) {
@@ -37,6 +36,8 @@ public class AdaptadorAlumno extends RecyclerView.Adapter<AdaptadorAlumno.Alumno
     @Override
     public void onBindViewHolder(@NonNull AlumnoViewHolder holder, int position) {
         holder.bindData(alumnos.get(position));
+
+        /*damos funcionalidad al elemento del recyclerView*/
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,10 +85,11 @@ public class AdaptadorAlumno extends RecyclerView.Adapter<AdaptadorAlumno.Alumno
             tv_nombre_alumno.setText(alumno.toString());
             tv_fichas.setText(String.valueOf(fichas));
             pb_alumno.setProgress(horas);
-            tv_total_horas.setText(horas + "/"+ Constantes.HORAS_PRACTICAS);
+            tv_total_horas.setText(String.valueOf(horas) + "/"+ String.valueOf(Constantes.HORAS_PRACTICAS));
         }
     }
 
+    /*Interface que nos permitirá darle funcionalidad cuando pulsemos sobre uno de los elementos del recyclerView*/
     public interface ItemClickListener {
 
         void onItemClickListener(Alumno alumno);

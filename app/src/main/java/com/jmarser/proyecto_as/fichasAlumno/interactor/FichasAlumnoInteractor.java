@@ -13,4 +13,6 @@ public interface FichasAlumnoInteractor {
     }
 
     void getAlumno(OnGetAlumnoListener listener);
+
+    void getAlumnoById(Long id, OnGetAlumnoListener listener);
 }

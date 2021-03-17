@@ -61,7 +61,8 @@
                     android:layout_height="match_parent"
                     android:layout_marginTop="5dp"
                     app:startIconDrawable="@drawable/ic_lock_24"
-                    app:passwordToggleEnabled="true">
+                    app:passwordToggleEnabled="true"
+                    app:helperText="mínimo 6 caracteres">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"

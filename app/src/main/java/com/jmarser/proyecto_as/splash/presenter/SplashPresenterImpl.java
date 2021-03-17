@@ -32,7 +32,7 @@ public class SplashPresenterImpl implements SplashPresenter, SplashInteractor.on
     @Override
     public void success(Login login) {
         SharedPrefManager.getInstance(context).guardarUsuario(login);
-        view.goToView(login.getRol());
+        view.goToView();
     }
 
     @Override

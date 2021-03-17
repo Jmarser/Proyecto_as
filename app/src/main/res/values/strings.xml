@@ -22,7 +22,6 @@
     <string name="no_hay_fichas_disponibles">No hay fichas disponibles</string>
     <string name="logout">Logout</string>
     <string name="fichas_presentadas">Fichas Presentadas</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="horas">Horas</string>
     <string name="firmado">Firmado</string>
@@ -32,5 +31,14 @@
     <string name="el_alumno_aun_no_tiene_fichas">El alumno aun no tiene fichas</string>
     <string name="error_al_cargar_el_usuario">Error al cargar el usuario</string>
     <string name="reintentar">Reintentar</string>
+    <string name="calendario">Calendario</string>
+    <string name="firma_alumno">Firma Alumno</string>
+    <string name="guardar_ficha">Guardar Ficha</string>
+    <string name="semana">Semana</string>
+    <string name="seleccione_fecha">Seleccione fecha</string>
+    <string name="enableUser">Usuario de baja</string>
+    <string name="Enabled_user">El usuario esta dado de baja</string>
+    <string name="ok">OK</string>
+    <string name="firmar">Firmar</string>
 
 </resources>

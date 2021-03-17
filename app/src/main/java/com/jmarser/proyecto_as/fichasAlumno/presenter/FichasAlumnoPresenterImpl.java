@@ -6,7 +6,7 @@ import com.jmarser.proyecto_as.fichasAlumno.interactor.FichasAlumnoInteractor;
 import com.jmarser.proyecto_as.fichasAlumno.view.FichasAlumnoView;
 import com.jmarser.proyecto_as.model.Alumno;
 
-public class FichasAlumnoPresenterImpl implements FichasAlumnoPresenter, FichasAlumnoInteractor.OnGetAlumnoListener{
+public class FichasAlumnoPresenterImpl implements FichasAlumnoPresenter, FichasAlumnoInteractor.OnGetAlumnoListener {
 
     private FichasAlumnoView view;
     private FichasAlumnoInteractor interactor;
@@ -26,16 +26,21 @@ public class FichasAlumnoPresenterImpl implements FichasAlumnoPresenter, FichasA
 
     @Override
     public void errorAlumno(String mensaje) {
-
+        view.errorAlumno(mensaje);
     }
 
     @Override
     public void unknowError(String mensaje) {
-
+        view.unknowError(mensaje);
     }
 
     @Override
     public void getAlumno() {
         interactor.getAlumno(this);
+    }
+
+    @Override
+    public void getAlumnoById(Long id) {
+        interactor.getAlumnoById(id, this);
     }
 }

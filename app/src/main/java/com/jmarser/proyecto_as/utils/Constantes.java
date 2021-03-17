@@ -14,12 +14,15 @@ public class Constantes {
 
     /*Constantes End point Retrofit*/
     public static final String BASE_URL_EMULADOR = "http://10.0.2.2:8080";//usada desde emulador para localhost
-    public static final String BASE_URL_TERMINAL = "http://192.168.1.47:8080";//usada desde terminal para localhost
+    public static final String BASE_URL_TERMINAL = "http://192.168.1.50:8080";//usada desde terminal para localhost
     public static final String API = "/api";
     public static final String ENDPOINT_LOGIN_USUARIO = "/login";
     public static final String ENDPOINT_GET_ALUMNO = "/alumno";
     public static final String ENDPOINT_GET_PROFESOR = "/profesor";
     public static final String ENDPOINT_GET_TUTOR = "/tutor";
+    public static final String ENDPOINT_SAVE_FICHA = "/save_ficha";
+    public static final String ENDPOINT_GET_ALUMNO_ID = "/alumno/{id}";
+    public static final String ENDPOINT_UPDATE_FICHA = "/update_ficha/{id}";
 
     /*Constantes roles*/
     public static final String ROL_ALUMNO = "Alumno";
@@ -29,6 +32,9 @@ public class Constantes {
     /*Horas para cumplir con las practicas*/
     public static final int HORAS_PRACTICAS = 350;
 
+    /*Keys parcelable, para el paso de objetos entre fragments y activities*/
+    public static final String KEY_ALUMNO = "alumno";
+    public static final String KEY_FICHA = "ficha";
 
 
 }

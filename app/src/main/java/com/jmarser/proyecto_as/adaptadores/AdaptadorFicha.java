@@ -6,22 +6,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.jmarser.proyecto_as.R;
 import com.jmarser.proyecto_as.model.Ficha;
-
 import java.util.List;
 
-public class AdaptadorFicha extends RecyclerView.Adapter<AdaptadorFicha.FichaViewHolder>{
+public class AdaptadorFicha extends RecyclerView.Adapter<AdaptadorFicha.FichaViewHolder> {
 
-    private List<Ficha> fichas;
+    private final List<Ficha> fichas;
     private Context contexto;
-    private int posicion;
-    private ItemClickListener itemClickListener;
+    private final ItemClickListener itemClickListener;
 
     public AdaptadorFicha(List<Ficha> fichas, Context contexto, ItemClickListener itemClickListener) {
         this.fichas = fichas;
@@ -38,6 +33,8 @@ public class AdaptadorFicha extends RecyclerView.Adapter<AdaptadorFicha.FichaVie
     @Override
     public void onBindViewHolder(@NonNull FichaViewHolder holder, int position) {
         holder.bindData(fichas.get(position));
+
+        /*Damos funcionalidad al hacer click en el elmento del recyclerView*/
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,15 +48,14 @@ public class AdaptadorFicha extends RecyclerView.Adapter<AdaptadorFicha.FichaVie
         return fichas.size();
     }
 
-
     /*clase interna*/
-    class FichaViewHolder extends RecyclerView.ViewHolder {
+    static class FichaViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView tv_descripcion;
-        private TextView tv_observaciones;
-        private CheckBox cb_firma_alumno;
-        private CheckBox cb_firma_profesor;
-        private CheckBox cb_firma_tutor;
+        private final TextView tv_descripcion;
+        private final TextView tv_observaciones;
+        private final CheckBox cb_firma_alumno;
+        private final CheckBox cb_firma_profesor;
+        private final CheckBox cb_firma_tutor;
 
 
         public FichaViewHolder(@NonNull View itemView) {
@@ -72,7 +68,7 @@ public class AdaptadorFicha extends RecyclerView.Adapter<AdaptadorFicha.FichaVie
 
         }
 
-        public void bindData(Ficha ficha){
+        public void bindData(Ficha ficha) {
             tv_descripcion.setText(ficha.getDescripcion());
             tv_observaciones.setText(ficha.getObservaciones());
             cb_firma_alumno.setChecked(ficha.isFirmaAlumno());
@@ -82,6 +78,7 @@ public class AdaptadorFicha extends RecyclerView.Adapter<AdaptadorFicha.FichaVie
 
     }
 
+    /*Interface que nos permitirá darle funcionalidad al click de los elementos del recyclerView*/
     public interface ItemClickListener {
 
         void onItemClickListener(Ficha ficha);

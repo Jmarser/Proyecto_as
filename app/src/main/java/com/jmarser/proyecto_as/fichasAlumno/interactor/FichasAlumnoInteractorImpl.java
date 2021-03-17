@@ -43,4 +43,26 @@ public class FichasAlumnoInteractorImpl implements FichasAlumnoInteractor{
             }
         });
     }
+
+    @Override
+    public void getAlumnoById(Long id, OnGetAlumnoListener listener) {
+        Call<Alumno> call = WebService.getInstance().createWsApi(WsApi.class).getAlumnoById(id);
+        call.enqueue(new Callback<Alumno>() {
+            @Override
+            public void onResponse(Call<Alumno> call, Response<Alumno> response) {
+                if(response.code() == 200){
+                    listener.success(response.body());
+                }else if(response.code() == 404){
+                    listener.errorAlumno(response.message());
+                }else{
+                    listener.unknowError(response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Alumno> call, Throwable t) {
+                listener.unknowError("Error desconocido del servidor.");
+            }
+        });
+    }
 }

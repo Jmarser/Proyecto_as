@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jmarser.proyecto_as.R;
 import com.jmarser.proyecto_as.adaptadores.AdaptadorAlumno;
@@ -123,6 +124,16 @@ public class AlumnosFragment extends Fragment implements AlumnosView, AdaptadorA
         if(tutor!= null){
             initRecycler();
         }
+    }
+
+    @Override
+    public void errorTutores(String mensaje) {
+        Toast.makeText(getContext(), mensaje, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void unknowError(String mensaje) {
+        Toast.makeText(getContext(), mensaje, Toast.LENGTH_SHORT).show();
     }
 
     @Override

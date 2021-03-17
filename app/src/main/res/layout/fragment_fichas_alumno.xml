@@ -12,10 +12,11 @@
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:elevation="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:elevation="5dp">
+        app:layout_constraintTop_toTopOf="parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -27,23 +28,23 @@
                 android:id="@+id/tv_title_nombre_alumno"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
                 android:text="@string/alumno"
-                android:textStyle="bold"
-                android:layout_marginTop="6dp"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_nombre_alumno_fichas"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"/>
+                android:layout_marginStart="20dp" />
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:text="@string/horas_completadas"
-                android:textStyle="bold"
-                android:layout_marginTop="4dp"/>
+                android:textStyle="bold" />
 
             <ProgressBar
                 android:id="@+id/pb_horas_alumno"
@@ -56,23 +57,31 @@
                 android:id="@+id/tv_info_horas_totales"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAlignment="viewEnd"
-                android:layout_marginEnd="8dp"/>
+                android:layout_marginEnd="8dp"
+                android:textAlignment="viewEnd" />
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_fichas_alumno"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@drawable/degradado_registro"
-        android:padding="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardView"
-        tools:listitem="@layout/ficha_row" />
+        app:layout_constraintTop_toBottomOf="@+id/cardView">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_fichas_alumno"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/degradado_registro"
+            android:padding="5dp"
+            tools:listitem="@layout/ficha_row" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
 
     <TextView
         android:id="@+id/tv_empty_fichas"
@@ -87,5 +96,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_nueva_ficha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        android:clickable="true"
+        android:contentDescription="imagen para nueva ficha"
+        android:focusable="true"
+        android:src="@drawable/ic_note_add_24"
+        app:backgroundTint="@color/md_blue_500"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,4 +4,5 @@ public interface FichasAlumnoPresenter {
 
     void getAlumno();
 
+    void getAlumnoById(Long id);
 }

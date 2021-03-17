@@ -43,7 +43,7 @@ public class SplashActivity extends AppCompatActivity implements SplashView {
     }
 
     @Override
-    public void goToView(String rol) {
+    public void goToView() {
         Toast.makeText(this, getResources().getString(R.string.login_ok), Toast.LENGTH_SHORT).show();//"Login correcto"
         Intent intent = new Intent(SplashActivity.this, PrincipalActivity.class);
         /*para evitar que desde la actividad de destino podamos volver a esta actividad utilizamos los

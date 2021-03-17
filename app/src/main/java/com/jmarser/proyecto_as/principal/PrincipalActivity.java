@@ -34,7 +34,6 @@ public class PrincipalActivity extends AppCompatActivity {
         setContentView(R.layout.activity_principal);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
-        //getSupportActionBar().setDisplayShowTitleEnabled(true);
 
         initFragment(SharedPrefManager.getInstance(this).getUsuario().getRol());
 

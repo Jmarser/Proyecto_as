@@ -32,12 +32,12 @@ public class AlumnosPresenterImpl implements AlumnosPresenter, AlumnosInteractor
 
     @Override
     public void errorTutores(String mensaje) {
-
+        view.errorTutores(mensaje);
     }
 
     @Override
     public void unkNowError(String mensaje) {
-
+        view.unknowError(mensaje);
     }
 
     @Override

@@ -7,16 +7,23 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jmarser.proyecto_as.R;
+import com.jmarser.proyecto_as.ficha.interactor.FichaFragmentInteractorImpl;
+import com.jmarser.proyecto_as.ficha.presenter.FichaFragmentPresenter;
+import com.jmarser.proyecto_as.ficha.presenter.FichaFragmentPresenterImpl;
 import com.jmarser.proyecto_as.model.Ficha;
+import com.jmarser.proyecto_as.mySharedPref.SharedPrefManager;
+import com.jmarser.proyecto_as.utils.Constantes;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class FichaFragment extends Fragment {
+public class FichaFragment extends Fragment implements View.OnClickListener, FichaFragmentView {
 
     @BindView(R.id.tv_horas_ficha)
     TextView tv_horas_ficha;
@@ -30,8 +37,11 @@ public class FichaFragment extends Fragment {
     CheckBox cb_firmaProfesor;
     @BindView(R.id.cb_firmaTutor)
     CheckBox cb_firmaTutor;
+    @BindView(R.id.btn_firmar_ficha)
+    Button btn_firmar_ficha;
 
     private Ficha ficha;
+    private FichaFragmentPresenter presenter;
 
     public FichaFragment() {
         // Required empty public constructor
@@ -40,7 +50,7 @@ public class FichaFragment extends Fragment {
     public static FichaFragment newInstance(Ficha ficha) {
         FichaFragment fragment = new FichaFragment();
         Bundle args = new Bundle();
-        args.putParcelable("ficha", ficha);
+        args.putParcelable(Constantes.KEY_FICHA, ficha);
         fragment.setArguments(args);
 
         return fragment;
@@ -50,8 +60,10 @@ public class FichaFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            ficha = getArguments().getParcelable("ficha");
+            ficha = getArguments().getParcelable(Constantes.KEY_FICHA);
         }
+
+        presenter = new FichaFragmentPresenterImpl(getContext(),this, new FichaFragmentInteractorImpl());
     }
 
     @Override
@@ -60,6 +72,8 @@ public class FichaFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_ficha, container, false);
         ButterKnife.bind(this, view);
+
+        btn_firmar_ficha.setOnClickListener(this);
 
         initView();
         return view;
@@ -75,5 +89,64 @@ public class FichaFragment extends Fragment {
         cb_firmaAlumno.setChecked(ficha.isFirmaAlumno());
         cb_firmaProfesor.setChecked(ficha.isFirmaProf());
         cb_firmaTutor.setChecked(ficha.isFirmaTutor());
+
+        if(SharedPrefManager.getInstance(getContext()).getUsuario().getRol().equalsIgnoreCase(Constantes.ROL_ALUMNO)){
+            btn_firmar_ficha.setVisibility(View.GONE);
+        }else{
+            btn_firmar_ficha.setVisibility(View.VISIBLE);
+        }
     }
+
+    private void initView(Ficha aux){
+        cb_firmaAlumno.setClickable(false);
+        cb_firmaProfesor.setClickable(false);
+        cb_firmaTutor.setClickable(false);
+        tv_descripcion_ficha.setText(aux.getDescripcion());
+        tv_observaciones_ficha.setText(aux.getObservaciones());
+        tv_horas_ficha.setText(String.valueOf(aux.getHoras()));
+        cb_firmaAlumno.setChecked(aux.isFirmaAlumno());
+        cb_firmaProfesor.setChecked(aux.isFirmaProf());
+        cb_firmaTutor.setChecked(aux.isFirmaTutor());
+
+        if(SharedPrefManager.getInstance(getContext()).getUsuario().getRol().equalsIgnoreCase(Constantes.ROL_ALUMNO)){
+            btn_firmar_ficha.setVisibility(View.GONE);
+        }else{
+            btn_firmar_ficha.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btn_firmar_ficha:
+                if(SharedPrefManager.getInstance(getContext()).getUsuario().getRol().equalsIgnoreCase(Constantes.ROL_PROFESOR)){
+                    presenter.checkTeacherSignature(ficha);
+                }else if(SharedPrefManager.getInstance(getContext()).getUsuario().getRol().equalsIgnoreCase(Constantes.ROL_TUTOR)){
+                    presenter.checkTutorSignature(ficha);
+                }
+                break;
+        }
+    }
+
+    @Override
+    public void unknowError(String mensaje) {
+        Toast.makeText(getContext(),mensaje,Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void errorFichaId(String mensaje) {
+        Toast.makeText(getContext(),mensaje,Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void successUpdate(Ficha aux) {
+        Toast.makeText(getContext(),"Ficha Firmada correctamente",Toast.LENGTH_SHORT).show();
+        initView(aux);
+    }
+
+    @Override
+    public void fileSigned(String mensaje) {
+        Toast.makeText(getContext(),mensaje,Toast.LENGTH_SHORT).show();
+    }
+
 }

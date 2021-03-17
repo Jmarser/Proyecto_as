@@ -14,20 +14,20 @@ import com.jmarser.proyecto_as.R;
 public class NavigationFragment {
 
     public static void replaceFragment(FragmentManager fm, Fragment fragment, String fragmentTag) {
-        fm.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        fm.popBackStack(fragmentTag, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         FragmentTransaction ft = fm.beginTransaction();
         ft.setCustomAnimations(android.R.anim.fade_in, 0, 0, android.R.anim.fade_out)
                 .replace(R.id.frame, fragment, fragmentTag)
-                .addToBackStack(null)
-                .commitAllowingStateLoss();
+                .addToBackStack(fragmentTag)
+                .commit();
     }
 
     public static void addFragment(FragmentManager fm, Fragment fragment, String fragmentTag) {
-        fm.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        fm.popBackStack(fragmentTag, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         FragmentTransaction ft = fm.beginTransaction();
         ft.setCustomAnimations(android.R.anim.fade_in, 0, 0, android.R.anim.fade_out)
                 .add(R.id.frame, fragment, fragmentTag)
                 .addToBackStack(null)
-                .commitAllowingStateLoss();
+                .commit();
     }
 }

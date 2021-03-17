@@ -1,6 +1,9 @@
 package com.jmarser.proyecto_as.login.view;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -68,18 +71,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView, View.
     @Override
     public void goToView(String rol) {
         Toast.makeText(this, getResources().getString(R.string.login_ok), Toast.LENGTH_SHORT).show();//"Login correcto"
-        Intent intent = null;
-        /*
-        if(rol.equalsIgnoreCase(Constantes.ROL_ALUMNO)){
-            intent = new Intent(LoginActivity.this, AlumnoActivity.class);
-        }else if(rol.equalsIgnoreCase(Constantes.ROL_PROFESOR)){
-            intent = new Intent(LoginActivity.this, ProfesorActivity.class);
-        }else if(rol.equalsIgnoreCase(Constantes.ROL_TUTOR)){
-            intent = new Intent(LoginActivity.this, TutorActivity.class);
-        }
-        limpiarCampos();
-        */
-         intent = new Intent(LoginActivity.this, PrincipalActivity.class);
+        Intent intent = new Intent(LoginActivity.this, PrincipalActivity.class);
         /*para evitar que desde la actividad de destino podamos volver a esta actividad utilizamos los
         siguinetes flags*/
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -97,7 +89,15 @@ public class LoginActivity extends AppCompatActivity implements LoginView, View.
 
         limpiarCampos();
         /*dialogo que indica que el usuario esta dado de baja*/
-
+        AlertDialog.Builder dialogo = new AlertDialog.Builder(this);
+        dialogo.setTitle(getResources().getString(R.string.enableUser))
+                .setMessage(getResources().getString(R.string.Enabled_user))
+                .setNeutralButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                }).show();
     }
 
     private void limpiarCampos() {

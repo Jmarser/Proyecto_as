@@ -5,5 +5,5 @@ public interface SplashView {
 
     void goToLogin();
 
-    void goToView(String rol);
+    void goToView();
 }

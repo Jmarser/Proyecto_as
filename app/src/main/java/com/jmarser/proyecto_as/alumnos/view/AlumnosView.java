@@ -8,4 +8,8 @@ public interface AlumnosView {
     void setProfesor(Profesor profesor);
 
     void setTutor(Tutor tutor);
+
+    void errorTutores(String mensaje);
+
+    void unknowError(String mensaje);
 }

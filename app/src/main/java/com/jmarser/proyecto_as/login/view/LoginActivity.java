@@ -95,9 +95,10 @@ public class LoginActivity extends AppCompatActivity implements LoginView, View.
                 .setNeutralButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        finish();
+                        finish(); //cerramos la aplicación
                     }
-                }).show();
+                });
+        dialogo.show();
     }
 
     private void limpiarCampos() {

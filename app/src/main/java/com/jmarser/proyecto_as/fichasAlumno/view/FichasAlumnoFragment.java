@@ -88,9 +88,8 @@ public class FichasAlumnoFragment extends Fragment implements FichasAlumnoView, 
             /*En este caso se ha loga do un alumno, por lo que hay que obtener sus fichas de la base
              de datos, además debemos mostrar el boton para crear una nueva ficha*/
             presenter.getAlumno();
+            fab_nueva_ficha.show();
             ocultarFloating();
-
-
         } else {
             /*Se ha logado un profesor/tutor por lo que no debemos solicitar datos a la base de datos
              * además no se debe de mostrar el boton para crear nuevas fichas*/
@@ -111,7 +110,6 @@ public class FichasAlumnoFragment extends Fragment implements FichasAlumnoView, 
         rv_fichas_alumno.setHasFixedSize(true);
         rv_fichas_alumno.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        fab_nueva_ficha.show();
         ocultarFloating();
 
         super.onViewCreated(view, savedInstanceState);
@@ -190,9 +188,12 @@ public class FichasAlumnoFragment extends Fragment implements FichasAlumnoView, 
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 if (dy > 0) {
                     fab_nueva_ficha.hide();
-
                 } else if (dy < 0) {
-                    fab_nueva_ficha.show();
+                    if(!SharedPrefManager.getInstance(getContext()).getUsuario().getRol().equalsIgnoreCase(Constantes.ROL_ALUMNO)){
+                        fab_nueva_ficha.hide();
+                    }else {
+                        fab_nueva_ficha.show();
+                    }
                 }
             }
         });
@@ -207,6 +208,9 @@ public class FichasAlumnoFragment extends Fragment implements FichasAlumnoView, 
                 presenter.getAlumnoById(alumno.getId());
                 adaptadorFicha.notifyDataSetChanged();//notificamos que ha habido un cambio al adaptador
                 swipe.setRefreshing(false); //detenemos la barra de progreso circular del refresh
+                if(!SharedPrefManager.getInstance(getContext()).getUsuario().getRol().equalsIgnoreCase(Constantes.ROL_ALUMNO)){
+                    fab_nueva_ficha.hide();
+                }
             }
         });
     }

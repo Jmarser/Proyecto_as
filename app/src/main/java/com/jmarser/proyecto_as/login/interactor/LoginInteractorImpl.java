@@ -3,12 +3,7 @@ package com.jmarser.proyecto_as.login.interactor;
 
 import com.jmarser.proyecto_as.api.WebService;
 import com.jmarser.proyecto_as.api.WsApi;
-import com.jmarser.proyecto_as.login.view.LoginActivity;
-import com.jmarser.proyecto_as.model.Alumno;
 import com.jmarser.proyecto_as.model.Login;
-import com.jmarser.proyecto_as.model.Usuario;
-import com.jmarser.proyecto_as.mySharedPref.SharedPrefManager;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -32,7 +27,7 @@ public class LoginInteractorImpl implements LoginInteractor {
             public void onResponse(Call<Login> call, Response<Login> response) {
                 if (response.code() == 200) {//login correcto
                     listener.success(response.body());
-                } else if (response.code() == 203) {//usuario dado de baja
+                } else if (response.code() == 409) {//usuario dado de baja
                     listener.enabledUser(response.message());
                 } else if (response.code() == 404){//error de login
                     listener.errorUser(response.message());

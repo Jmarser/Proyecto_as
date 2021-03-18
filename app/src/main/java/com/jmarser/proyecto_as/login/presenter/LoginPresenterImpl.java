@@ -1,17 +1,14 @@
 package com.jmarser.proyecto_as.login.presenter;
 
 import android.content.Context;
-import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.util.Patterns;
-import android.widget.Toast;
-
 import com.google.android.material.textfield.TextInputLayout;
 import com.jmarser.proyecto_as.login.interactor.LoginInteractor;
 import com.jmarser.proyecto_as.login.view.LoginView;
 import com.jmarser.proyecto_as.model.Login;
 import com.jmarser.proyecto_as.mySharedPref.SharedPrefManager;
-import com.jmarser.proyecto_as.utils.Constantes;
+
 
 public class LoginPresenterImpl implements LoginPresenter, LoginInteractor.onLoginFinishedListener {
 

@@ -1,6 +1,9 @@
 package com.jmarser.proyecto_as.splash.view;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.WindowManager;
@@ -50,6 +53,21 @@ public class SplashActivity extends AppCompatActivity implements SplashView {
         siguinetes flags*/
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+    }
+
+    @Override
+    public void enabledUser(String mensaje) {
+        /*dialogo que indica que el usuario esta dado de baja*/
+        AlertDialog.Builder dialogo = new AlertDialog.Builder(this);
+        dialogo.setTitle(getResources().getString(R.string.enableUser))
+                .setMessage(getResources().getString(R.string.Enabled_user))
+                .setNeutralButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        SharedPrefManager.getInstance(SplashActivity.this).limpiarShared();
+                        finish(); //cerramos la aplicación
+                    }
+                }).show();
     }
 
     /*Comprobamos que haya un usuario guardado en la sharedpreferences e intentamos hacer login, de no

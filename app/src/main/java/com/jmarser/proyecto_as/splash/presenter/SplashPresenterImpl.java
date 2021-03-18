@@ -42,6 +42,11 @@ public class SplashPresenterImpl implements SplashPresenter, SplashInteractor.on
     }
 
     @Override
+    public void enabledUser(String mensaje) {
+        view.enabledUser(mensaje);
+    }
+
+    @Override
     public void tryToLogin() {
         String email = SharedPrefManager.getInstance(context).getUsuario().getEmail();
         String password = SharedPrefManager.getInstance(context).getUsuario().getPassword();

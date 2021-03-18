@@ -11,6 +11,8 @@ public interface SplashInteractor {
         void success(Login login);
 
         void unknownError(String mensaje);
+
+        void enabledUser(String mensaje);
     }
 
     void tryToLogin(String email, String password, onLoginFinishedListener listener, Context context);

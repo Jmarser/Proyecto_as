@@ -6,4 +6,6 @@ public interface SplashView {
     void goToLogin();
 
     void goToView();
+
+    void enabledUser(String mensaje);
 }

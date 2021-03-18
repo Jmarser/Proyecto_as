@@ -97,8 +97,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView, View.
                     public void onClick(DialogInterface dialog, int which) {
                         finish(); //cerramos la aplicación
                     }
-                });
-        dialogo.show();
+                }).show();
     }
 
     private void limpiarCampos() {

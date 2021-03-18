@@ -7,6 +7,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.jmarser.proyecto_as.model.Alumno;
 import com.jmarser.proyecto_as.model.Ficha;
 import com.jmarser.proyecto_as.mySharedPref.SharedPrefManager;
@@ -43,12 +44,12 @@ public class NewFichaPresenterImpl implements NewFichaPresenter, NewFichaInterac
     }
 
     @Override
-    public void validarCampos(Spinner sp_horas, String fecha, EditText descripcion, EditText observaciones, CheckBox firmado, Alumno alumno) {
+    public void validarCampos(Spinner sp_horas, String fecha, TextInputLayout descripcion, TextInputLayout observaciones, CheckBox firmado, Alumno alumno) {
         if(sp_horas.getSelectedItemPosition() != 0){
             int horas = Integer.parseInt(sp_horas.getSelectedItem().toString());
             if(!TextUtils.isEmpty(fecha)){
-                if(!descripcion.getText().toString().isEmpty()){
-                    String descrip = descripcion.getText().toString();
+                if(!descripcion.getEditText().getText().toString().isEmpty()){
+                    String descrip = descripcion.getEditText().getText().toString();
                     if(firmado.isChecked()){
                         if(alumno != null) {
                             Ficha ficha = new Ficha();
@@ -56,7 +57,7 @@ public class NewFichaPresenterImpl implements NewFichaPresenter, NewFichaInterac
                             ficha.setHoras(horas);
                             ficha.setFecha(fecha);
                             ficha.setDescripcion(descrip);
-                            ficha.setObservaciones(observaciones.getText().toString());
+                            ficha.setObservaciones(observaciones.getEditText().getText().toString());
                             ficha.setFirmaAlumno(firmado.isChecked());
                             interactor.saveFicha(ficha, this);
                         }else{

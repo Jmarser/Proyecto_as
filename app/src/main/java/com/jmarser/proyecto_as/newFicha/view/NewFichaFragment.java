@@ -14,6 +14,8 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.google.android.material.textfield.TextInputLayout;
 import com.jmarser.proyecto_as.R;
 import com.jmarser.proyecto_as.model.Alumno;
 import com.jmarser.proyecto_as.newFicha.interactor.NewFichaInteractorImpl;
@@ -29,10 +31,10 @@ public class NewFichaFragment extends Fragment implements View.OnClickListener, 
     Spinner sp_horas;
     @BindView(R.id.selector_fecha)
     DatePicker selector_fecha;
-    @BindView(R.id.et_descripcion_ficha)
-    EditText et_descripcion;
-    @BindView(R.id.et_observaciones_ficha)
-    EditText et_observaciones;
+    @BindView(R.id.til_descripcion_nueva_ficha)
+    TextInputLayout til_descripcion;
+    @BindView(R.id.til_observaciones_nueva_ficha)
+    TextInputLayout til_observaciones;
     @BindView(R.id.cb_newFicha_firma)
     CheckBox cb_newFicha;
     @BindView(R.id.btn_nueva_ficha)
@@ -95,15 +97,15 @@ public class NewFichaFragment extends Fragment implements View.OnClickListener, 
             case R.id.btn_nueva_ficha:
                 String fecha = String.valueOf(selector_fecha.getDayOfMonth()) + "/"+
                         String.valueOf((selector_fecha.getMonth()+1)) + "/" + String.valueOf(selector_fecha.getYear());
-                presenter.validarCampos(sp_horas, fecha, et_descripcion, et_observaciones, cb_newFicha, alumno);
+                presenter.validarCampos(sp_horas, fecha, til_descripcion, til_observaciones, cb_newFicha, alumno);
                 break;
         }
     }
 
     private void limpiarCampos() {
         sp_horas.setSelection(0);
-        et_descripcion.setText("");
-        et_observaciones.setText("");
+        til_descripcion.getEditText().setText("");
+        til_observaciones.getEditText().setText("");
         cb_newFicha.setChecked(false);
     }
 
@@ -120,8 +122,8 @@ public class NewFichaFragment extends Fragment implements View.OnClickListener, 
 
     @Override
     public void showErrorDescripcion(String mensaje) {
-        et_descripcion.setError(mensaje);
-        et_descripcion.requestFocus();
+        til_descripcion.getEditText().setError(mensaje);
+        til_descripcion.requestFocus();
     }
 
     @Override

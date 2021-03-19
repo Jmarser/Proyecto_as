@@ -144,6 +144,11 @@ public class NewFichaFragment extends Fragment implements View.OnClickListener, 
     }
 
     @Override
+    public void errorFichaExist(String mensaje) {
+        Toast.makeText(getContext(), mensaje, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
     public void unknowError(String mensaje) {
         Toast.makeText(getContext(), mensaje, Toast.LENGTH_SHORT).show();
     }

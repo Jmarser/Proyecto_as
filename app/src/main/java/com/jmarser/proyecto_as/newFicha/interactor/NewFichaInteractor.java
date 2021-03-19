@@ -9,6 +9,8 @@ public interface NewFichaInteractor {
 
         void errorNewFicha(String mensaje);
 
+        void errorFichaExist(String mensaje);
+
         void unknowError(String mensaje);
     }
 

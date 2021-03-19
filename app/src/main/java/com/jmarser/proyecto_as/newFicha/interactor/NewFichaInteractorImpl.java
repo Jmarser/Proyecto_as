@@ -16,8 +16,10 @@ public class NewFichaInteractorImpl implements NewFichaInteractor{
         call.enqueue(new Callback<Ficha>() {
             @Override
             public void onResponse(Call<Ficha> call, Response<Ficha> response) {
-                if(response.code() == 201){
+                if(response.code() == 201) {
                     listener.success();
+                }else if(response.code() == 409){
+                    listener.errorFichaExist(response.message());
                 }else if(response.code() == 400){
                     listener.errorNewFicha(response.message());
                 }else{

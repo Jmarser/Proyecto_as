@@ -39,6 +39,11 @@ public class NewFichaPresenterImpl implements NewFichaPresenter, NewFichaInterac
     }
 
     @Override
+    public void errorFichaExist(String mensaje) {
+        view.errorFichaExist(mensaje);
+    }
+
+    @Override
     public void unknowError(String mensaje) {
         view.unknowError(mensaje);
     }

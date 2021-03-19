@@ -14,7 +14,7 @@ public class Constantes {
 
     /*Constantes End point Retrofit*/
     public static final String BASE_URL_EMULADOR = "http://10.0.2.2:8080";//usada desde emulador para localhost
-    public static final String BASE_URL_TERMINAL = "http://192.168.1.50:8080";//usada desde terminal para localhost
+    public static final String BASE_URL_TERMINAL = "http://192.168.1.53:8080";//usada desde terminal para localhost
     public static final String API = "/api";
     public static final String ENDPOINT_LOGIN_USUARIO = "/login";
     public static final String ENDPOINT_GET_ALUMNO = "/alumno";

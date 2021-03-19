@@ -14,5 +14,7 @@ public interface NewFichaView {
 
     void saveFichaOk(String mensaje);
 
+    void errorFichaExist(String mensaje);
+
     void unknowError(String mensaje);
 }

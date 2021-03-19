@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ficha.view.FichaFragment">
+    tools:context=".ficha.view.FichaFragment"
+    android:background="@drawable/degradado_registro">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -59,7 +60,7 @@
             android:id="@+id/cv_descripcion_ficha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_horas_ficha">
@@ -97,6 +98,9 @@
             android:id="@+id/cv_observaciones_ficha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cv_descripcion_ficha">
 
             <LinearLayout
@@ -129,6 +133,9 @@
             android:id="@+id/cv_firmas_ficha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cv_observaciones_ficha">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -188,6 +195,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="24dp"
             android:text="@string/firmar"
+            android:background="@drawable/degradado_button_login"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

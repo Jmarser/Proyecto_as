@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.Proyecto_as" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/md_purple_800</item>
-        <item name="colorPrimaryVariant">@color/md_purple_700</item>
+        <item name="colorPrimary">@color/md_blue_A700</item>
+        <item name="colorPrimaryVariant">@color/md_light_blue_700</item>
         <item name="colorOnPrimary">@color/md_white_1000</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/md_red_700</item>

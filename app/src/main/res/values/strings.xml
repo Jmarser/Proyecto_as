@@ -39,6 +39,6 @@
     <string name="enableUser">Usuario de baja</string>
     <string name="Enabled_user">El usuario esta dado de baja</string>
     <string name="ok">OK</string>
-    <string name="firmar">Firmar</string>
+    <string name="firmar">Firmar Ficha</string>
 
 </resources>

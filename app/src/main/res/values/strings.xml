@@ -40,5 +40,6 @@
     <string name="Enabled_user">El usuario esta dado de baja</string>
     <string name="ok">OK</string>
     <string name="firmar">Firmar Ficha</string>
+    <string name="icono_informacion">icono informacion</string>
 
 </resources>

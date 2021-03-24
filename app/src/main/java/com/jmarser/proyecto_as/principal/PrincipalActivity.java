@@ -1,18 +1,27 @@
 package com.jmarser.proyecto_as.principal;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.navigation.NavigationView;
 import com.jmarser.proyecto_as.R;
 import com.jmarser.proyecto_as.alumnos.view.AlumnosFragment;
+import com.jmarser.proyecto_as.cuenta.CuentaFragment;
 import com.jmarser.proyecto_as.errorUsuario.ErrorUsuarioFragment;
 import com.jmarser.proyecto_as.fichasAlumno.view.FichasAlumnoFragment;
 import com.jmarser.proyecto_as.login.view.LoginActivity;
@@ -24,37 +33,42 @@ import com.jmarser.proyecto_as.utils.NavigationFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class PrincipalActivity extends AppCompatActivity {
+public class PrincipalActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     @BindView(R.id.toolbar_base)
     Toolbar toolbar;
+    @BindView(R.id.drawerLayout)
+    DrawerLayout drawerLayout;
+    @BindView(R.id.nav_view)
+    NavigationView nav_view;
+
+
+    //para poner el icono de hamburguesa al NavigationDrawer
+    private ActionBarDrawerToggle toggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
         ButterKnife.bind(this);
+
         setSupportActionBar(toolbar);
 
+        //iniciamos con el fragmento correspondiente al usuario logado
         initFragment(SharedPrefManager.getInstance(this).getUsuario().getRol());
 
-    }
+        //funcionalidad para el boton de hamburguesa
+        toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_drawer, R.string.close_drawer);
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_toolbar, menu);
-        return true;
-    }
+        drawerLayout.addDrawerListener(toggle);
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_logout:
-                logout();
-                break;
+        nav_view.setNavigationItemSelectedListener(this);
+
+        if(savedInstanceState == null){
+            initFragment(SharedPrefManager.getInstance(this).getUsuario().getRol());
+            nav_view.setCheckedItem(R.id.menu_home);
         }
 
-        return super.onOptionsItemSelected(item);
     }
 
     /*Método que nos dirigirá al fragment que le corresponda al usuario logado segun su rol*/
@@ -88,5 +102,54 @@ public class PrincipalActivity extends AppCompatActivity {
                 })
                 .setNegativeButton(getResources().getString(R.string.No), null)
                 .show();
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.menu_home:
+                initFragment(SharedPrefManager.getInstance(this).getUsuario().getRol());
+                break;
+            case R.id.menu_cuenta:
+                getSupportActionBar().setTitle("Cuenta");
+                NavigationFragment.replaceFragment(getSupportFragmentManager(), CuentaFragment.newInstance(), CuentaFragment.class.getName());
+                break;
+            case R.id.menu_desarrollador:
+                getSupportActionBar().setTitle("Desarrollador");
+
+                break;
+            case R.id.menu_logout:
+                logout();
+                break;
+        }
+
+        /*Para que el NavigationDrawer se oculte al pulsar sobre una de las opciones*/
+        drawerLayout.closeDrawer(GravityCompat.START);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(toggle.onOptionsItemSelected(item)){
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+            drawerLayout.closeDrawer(GravityCompat.START);
+        }else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        toggle.syncState();
     }
 }

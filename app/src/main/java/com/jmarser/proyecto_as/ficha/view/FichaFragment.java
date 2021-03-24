@@ -22,6 +22,7 @@ import com.jmarser.proyecto_as.utils.Constantes;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import es.dmoral.toasty.Toasty;
 
 public class FichaFragment extends Fragment implements View.OnClickListener, FichaFragmentView {
 
@@ -130,23 +131,22 @@ public class FichaFragment extends Fragment implements View.OnClickListener, Fic
 
     @Override
     public void unknowError(String mensaje) {
-        Toast.makeText(getContext(),mensaje,Toast.LENGTH_SHORT).show();
+        Toasty.error(getContext(),mensaje, Toasty.LENGTH_SHORT).show();
     }
 
     @Override
     public void errorFichaId(String mensaje) {
-        Toast.makeText(getContext(),mensaje,Toast.LENGTH_SHORT).show();
+        Toasty.error(getContext(),mensaje, Toasty.LENGTH_SHORT).show();
     }
 
     @Override
     public void successUpdate(Ficha aux) {
-        Toast.makeText(getContext(),"Ficha Firmada correctamente",Toast.LENGTH_SHORT).show();
+        Toasty.success(getContext(), getResources().getString(R.string.firma_ok),Toasty.LENGTH_SHORT).show();
         initView(aux);
     }
 
     @Override
     public void fileSigned(String mensaje) {
-        Toast.makeText(getContext(),mensaje,Toast.LENGTH_SHORT).show();
+        Toasty.info(getContext(),mensaje, Toasty.LENGTH_SHORT).show();
     }
-
 }

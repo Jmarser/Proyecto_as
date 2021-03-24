@@ -20,9 +20,11 @@ import com.jmarser.proyecto_as.mySharedPref.SharedPrefManager;
 import com.jmarser.proyecto_as.splash.interactor.SplashInteractorImpl;
 import com.jmarser.proyecto_as.splash.presenter.SplashPresenter;
 import com.jmarser.proyecto_as.splash.presenter.SplashPresenterImpl;
+import com.jmarser.proyecto_as.utils.NavigationActivitis;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import es.dmoral.toasty.Toasty;
 
 public class SplashActivity extends AppCompatActivity implements SplashView {
 
@@ -46,28 +48,17 @@ public class SplashActivity extends AppCompatActivity implements SplashView {
         comprobarShared();
     }
 
-
     @Override
     public void goToLogin() {
         pb_cargando.setVisibility(View.INVISIBLE);
-        mensajePersonalizado("Error al cargar el usuario");
-        Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
-        //para evitar que al darle hacia atras volvamos a esta pantalla, iniciamos una nueva lista de tareas y cerramos esta.
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-
+        NavigationActivitis.pasarActividad(SplashActivity.this, LoginActivity.class);
     }
 
     @Override
     public void goToView() {
         pb_cargando.setVisibility(View.INVISIBLE);
-        Toast.makeText(this, getResources().getString(R.string.login_ok), Toast.LENGTH_SHORT).show();//"Login correcto"
-
-        Intent intent = new Intent(SplashActivity.this, PrincipalActivity.class);
-        /*para evitar que desde la actividad de destino podamos volver a esta actividad utilizamos los
-        siguinetes flags*/
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
+        Toasty.success(this, getResources().getString(R.string.login_ok), Toasty.LENGTH_SHORT).show();
+        NavigationActivitis.pasarActividad(SplashActivity.this, PrincipalActivity.class);
     }
 
     @Override
@@ -86,6 +77,18 @@ public class SplashActivity extends AppCompatActivity implements SplashView {
                 }).show();
     }
 
+    @Override
+    public void unknowError(String mensaje) {
+        Toasty.error(this, mensaje, Toasty.LENGTH_SHORT).show();
+        goToLogin();
+    }
+
+    @Override
+    public void errorUser(String mensaje) {
+        Toasty.error(this, mensaje, Toasty.LENGTH_SHORT).show();
+        goToLogin();
+    }
+
     /*Comprobamos que haya un usuario guardado en la sharedpreferences e intentamos hacer login, de no
     * haberlo vamos a la actividad de login.*/
     private void comprobarShared() {
@@ -94,18 +97,5 @@ public class SplashActivity extends AppCompatActivity implements SplashView {
         } else {
             goToLogin();
         }
-    }
-
-    private void mensajePersonalizado(String mensaje){
-        LayoutInflater inflater = getLayoutInflater();
-        View layout = inflater.inflate(R.layout.toast_personalizado, findViewById(R.id.layout_toast));
-        TextView texto = layout.findViewById(R.id.tv_mensaje_toast);
-        texto.setText(mensaje);
-
-        Toast toast = new Toast(this);
-        toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 200);
-        toast.setDuration(Toast.LENGTH_SHORT);
-        toast.setView(layout);
-        toast.show();
     }
 }

@@ -12,6 +12,7 @@ import android.widget.Button;
 
 import com.jmarser.proyecto_as.R;
 import com.jmarser.proyecto_as.splash.view.SplashActivity;
+import com.jmarser.proyecto_as.utils.NavigationActivitis;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -51,9 +52,6 @@ public class ErrorUsuarioFragment extends Fragment implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(getActivity(), SplashActivity.class);
-        //para evitar que al darle hacia atras volvamos a esta pantalla, iniciamos una nueva lista de tareas y cerramos esta.
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
+        NavigationActivitis.pasarActividad(getActivity(),SplashActivity.class);
     }
 }

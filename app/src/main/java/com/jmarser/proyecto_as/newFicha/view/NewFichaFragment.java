@@ -24,6 +24,7 @@ import com.jmarser.proyecto_as.newFicha.presenter.NewFichaPresenterImpl;
 import com.jmarser.proyecto_as.utils.Constantes;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import es.dmoral.toasty.Toasty;
 
 public class NewFichaFragment extends Fragment implements View.OnClickListener, NewFichaView {
 
@@ -111,7 +112,7 @@ public class NewFichaFragment extends Fragment implements View.OnClickListener, 
 
     @Override
     public void showErrorHoras(String mensaje) {
-        Toast.makeText(getContext(), mensaje, Toast.LENGTH_SHORT).show();
+        Toasty.error(getContext(), mensaje, Toasty.LENGTH_SHORT).show();
         sp_horas.requestFocus();
     }
 
@@ -128,28 +129,28 @@ public class NewFichaFragment extends Fragment implements View.OnClickListener, 
 
     @Override
     public void showErrorFirma(String mensaje) {
-        Toast.makeText(getContext(), mensaje, Toast.LENGTH_SHORT).show();
+        Toasty.error(getContext(), mensaje, Toasty.LENGTH_SHORT).show();
         cb_newFicha.requestFocus();
     }
 
     @Override
     public void showErrorAlumno(String mensaje) {
-        Toast.makeText(getContext(), mensaje, Toast.LENGTH_SHORT).show();
+        Toasty.error(getContext(), mensaje, Toasty.LENGTH_SHORT).show();
     }
 
     @Override
     public void saveFichaOk(String mensaje) {
-        Toast.makeText(getContext(), mensaje, Toast.LENGTH_SHORT).show();
+        Toasty.error(getContext(), mensaje, Toasty.LENGTH_SHORT).show();
         limpiarCampos();
     }
 
     @Override
     public void errorFichaExist(String mensaje) {
-        Toast.makeText(getContext(), mensaje, Toast.LENGTH_SHORT).show();
+        Toasty.error(getContext(), mensaje, Toasty.LENGTH_SHORT).show();
     }
 
     @Override
     public void unknowError(String mensaje) {
-        Toast.makeText(getContext(), mensaje, Toast.LENGTH_SHORT).show();
+        Toasty.error(getContext(), mensaje, Toasty.LENGTH_SHORT).show();
     }
 }

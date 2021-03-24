@@ -24,9 +24,8 @@ public class SplashPresenterImpl implements SplashPresenter, SplashInteractor.on
 
     @Override
     public void errorUser(String mensaje) {
-        Toast.makeText(context, mensaje, Toast.LENGTH_SHORT).show();
         SharedPrefManager.getInstance(context).limpiarShared();
-        view.goToLogin();
+        view.errorUser(mensaje);
     }
 
     @Override
@@ -37,8 +36,7 @@ public class SplashPresenterImpl implements SplashPresenter, SplashInteractor.on
 
     @Override
     public void unknownError(String mensaje) {
-        Toast.makeText(context, mensaje, Toast.LENGTH_SHORT).show();
-        view.goToLogin();
+        view.unknowError(mensaje);
     }
 
     @Override

@@ -18,6 +18,7 @@ import com.jmarser.proyecto_as.fichasAlumno.view.FichasAlumnoFragment;
 import com.jmarser.proyecto_as.login.view.LoginActivity;
 import com.jmarser.proyecto_as.mySharedPref.SharedPrefManager;
 import com.jmarser.proyecto_as.utils.Constantes;
+import com.jmarser.proyecto_as.utils.NavigationActivitis;
 import com.jmarser.proyecto_as.utils.NavigationFragment;
 
 import butterknife.BindView;
@@ -49,7 +50,6 @@ public class PrincipalActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_logout:
-                Toast.makeText(this, "has pulsado deslogarse", Toast.LENGTH_SHORT).show();
                 logout();
                 break;
         }
@@ -60,13 +60,13 @@ public class PrincipalActivity extends AppCompatActivity {
     /*Método que nos dirigirá al fragment que le corresponda al usuario logado segun su rol*/
     private void initFragment(String rol) {
         if (rol.equalsIgnoreCase(Constantes.ROL_ALUMNO)) {
-            getSupportActionBar().setTitle("ALUMNO");
+            getSupportActionBar().setTitle(Constantes.ROL_ALUMNO.toUpperCase());
             NavigationFragment.addFragment(getSupportFragmentManager(), FichasAlumnoFragment.newInstance(null), FichasAlumnoFragment.class.getName());
         } else if (rol.equalsIgnoreCase(Constantes.ROL_PROFESOR)) {
-            getSupportActionBar().setTitle("PROFESOR");
+            getSupportActionBar().setTitle(Constantes.ROL_PROFESOR.toUpperCase());
             NavigationFragment.addFragment(getSupportFragmentManager(), AlumnosFragment.newInstance(), AlumnosFragment.class.getName());
         } else if (rol.equalsIgnoreCase(Constantes.ROL_TUTOR)) {
-            getSupportActionBar().setTitle("TUTOR");
+            getSupportActionBar().setTitle(Constantes.ROL_TUTOR.toUpperCase());
             NavigationFragment.addFragment(getSupportFragmentManager(), AlumnosFragment.newInstance(), AlumnosFragment.class.getName());
         }else{
             NavigationFragment.addFragment(getSupportFragmentManager(), ErrorUsuarioFragment.newInstance(), ErrorUsuarioFragment.class.getName());
@@ -77,18 +77,16 @@ public class PrincipalActivity extends AppCompatActivity {
     * y devolviendos a la actividad de login*/
     private void logout() {
         final AlertDialog.Builder dialogo = new AlertDialog.Builder(this);
-        dialogo.setTitle("Salir")
-                .setMessage("¿Seguro que quiere cerrar sesión?")
-                .setPositiveButton("SI", new DialogInterface.OnClickListener() {
+        dialogo.setTitle(getResources().getString(R.string.salir))//salir
+                .setMessage(getResources().getString(R.string.conf_cerrar_sesion))//"¿Seguro que quiere cerrar sesión?"
+                .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         SharedPrefManager.getInstance(getApplicationContext()).limpiarShared();
-                        Intent intent = new Intent(PrincipalActivity.this, LoginActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
+                        NavigationActivitis.pasarActividad(PrincipalActivity.this, LoginActivity.class);
                     }
                 })
-                .setNegativeButton("NO", null)
+                .setNegativeButton(getResources().getString(R.string.No), null)
                 .show();
     }
 }

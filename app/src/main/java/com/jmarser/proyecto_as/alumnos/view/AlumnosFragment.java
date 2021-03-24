@@ -29,6 +29,7 @@ import com.jmarser.proyecto_as.utils.NavigationFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import es.dmoral.toasty.Toasty;
 
 public class AlumnosFragment extends Fragment implements AlumnosView, AdaptadorAlumno.ItemClickListener {
 
@@ -128,12 +129,12 @@ public class AlumnosFragment extends Fragment implements AlumnosView, AdaptadorA
 
     @Override
     public void errorTutores(String mensaje) {
-        Toast.makeText(getContext(), mensaje, Toast.LENGTH_SHORT).show();
+        Toasty.error(getContext(), mensaje, Toasty.LENGTH_SHORT).show();
     }
 
     @Override
     public void unknowError(String mensaje) {
-        Toast.makeText(getContext(), mensaje, Toast.LENGTH_SHORT).show();
+        Toasty.error(getContext(), mensaje, Toasty.LENGTH_SHORT).show();
     }
 
     @Override

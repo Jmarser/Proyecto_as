@@ -8,4 +8,8 @@ public interface SplashView {
     void goToView();
 
     void enabledUser(String mensaje);
+
+    void unknowError(String mensaje);
+
+    void errorUser(String mensaje);
 }

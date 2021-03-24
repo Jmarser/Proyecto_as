@@ -15,8 +15,11 @@ import com.jmarser.proyecto_as.R;
 import com.jmarser.proyecto_as.login.interactor.LoginInteractorImpl;
 import com.jmarser.proyecto_as.login.presenter.LoginPresenter;
 import com.jmarser.proyecto_as.login.presenter.LoginPresenterImpl;
+import com.jmarser.proyecto_as.utils.NavigationActivitis;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import es.dmoral.toasty.Toasty;
 
 public class LoginActivity extends AppCompatActivity implements LoginView, View.OnClickListener {
 
@@ -64,18 +67,14 @@ public class LoginActivity extends AppCompatActivity implements LoginView, View.
 
     @Override
     public void showErrorUser(String mensaje) {
-        Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show();
+        Toasty.error(this, mensaje, Toasty.LENGTH_SHORT).show();
         limpiarCampos();
     }
 
     @Override
     public void goToView(String rol) {
-        Toast.makeText(this, getResources().getString(R.string.login_ok), Toast.LENGTH_SHORT).show();//"Login correcto"
-        Intent intent = new Intent(LoginActivity.this, PrincipalActivity.class);
-        /*para evitar que desde la actividad de destino podamos volver a esta actividad utilizamos los
-        siguinetes flags*/
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
+        Toasty.success(this, getResources().getString(R.string.login_ok), Toasty.LENGTH_SHORT).show();
+        NavigationActivitis.pasarActividad(LoginActivity.this, PrincipalActivity.class);
     }
 
     @Override

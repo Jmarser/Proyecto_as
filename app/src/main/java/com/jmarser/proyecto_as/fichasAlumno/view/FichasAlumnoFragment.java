@@ -70,7 +70,7 @@ public class FichasAlumnoFragment extends Fragment implements FichasAlumnoView, 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
+        if (savedInstanceState != null) {
             alumno = getArguments().getParcelable(Constantes.KEY_ALUMNO);
         }
 
@@ -214,5 +214,11 @@ public class FichasAlumnoFragment extends Fragment implements FichasAlumnoView, 
                 }
             }
         });
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState){
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(Constantes.KEY_ALUMNO, alumno);
     }
 }

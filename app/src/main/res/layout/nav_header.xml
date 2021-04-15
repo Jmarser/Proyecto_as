@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/header_nav"
     android:layout_width="match_parent"
     android:layout_height="125dp"
-    android:background="@color/md_teal_700"
+    android:background="@drawable/degradado_registro"
     android:gravity="bottom"
     android:paddingTop="10dp"
     android:paddingStart="10dp"
@@ -13,7 +14,7 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/ic_menu_account_24"/>
+        android:src="@drawable/logo_ies_trassierras"/>
 
     <TextView
         android:id="@+id/tv_drawer_nombre"
@@ -21,9 +22,10 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:text="Nombre del usuario"
+        android:text="SISTEMA DE CONTROL FCT"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/md_white_1000"/>
 
 
 </LinearLayout>

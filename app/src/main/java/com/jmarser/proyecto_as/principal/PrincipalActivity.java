@@ -12,9 +12,12 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,7 +45,6 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
     @BindView(R.id.nav_view)
     NavigationView nav_view;
 
-
     //para poner el icono de hamburguesa al NavigationDrawer
     private ActionBarDrawerToggle toggle;
 
@@ -57,18 +59,20 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
         //iniciamos con el fragmento correspondiente al usuario logado
         initFragment(SharedPrefManager.getInstance(this).getUsuario().getRol());
 
+        nav_view.bringToFront();//nos aseguramos que el navigationDrawer se muestre al frente
+
         //funcionalidad para el boton de hamburguesa
         toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_drawer, R.string.close_drawer);
 
-        drawerLayout.addDrawerListener(toggle);
+        drawerLayout.addDrawerListener(toggle);//asignamos el boton hamburguesa al drawer
 
-        nav_view.setNavigationItemSelectedListener(this);
+        nav_view.setNavigationItemSelectedListener(this);//funcionalidad a los botones del menu lateral
 
+        //en el caso de que se guire la pantalla volvemos al fragment principal
         if(savedInstanceState == null){
             initFragment(SharedPrefManager.getInstance(this).getUsuario().getRol());
             nav_view.setCheckedItem(R.id.menu_home);
         }
-
     }
 
     /*Método que nos dirigirá al fragment que le corresponda al usuario logado segun su rol*/
@@ -152,4 +156,5 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
         super.onPostCreate(savedInstanceState);
         toggle.syncState();
     }
+
 }

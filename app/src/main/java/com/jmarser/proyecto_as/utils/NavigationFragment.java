@@ -18,7 +18,7 @@ public class NavigationFragment {
         FragmentTransaction ft = fm.beginTransaction();
         ft.setCustomAnimations(android.R.anim.fade_in, 0, 0, android.R.anim.fade_out)
                 .replace(R.id.frame, fragment, fragmentTag)
-                .addToBackStack(fragmentTag)
+                .addToBackStack(null)
                 .commit();
     }
 

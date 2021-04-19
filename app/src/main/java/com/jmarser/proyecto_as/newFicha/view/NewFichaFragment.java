@@ -1,5 +1,8 @@
 package com.jmarser.proyecto_as.newFicha.view;
 
+import android.app.DatePickerDialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,10 +14,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
-
+import android.widget.TextView;
 import com.google.android.material.textfield.TextInputLayout;
 import com.jmarser.proyecto_as.R;
 import com.jmarser.proyecto_as.model.Alumno;
@@ -22,6 +23,7 @@ import com.jmarser.proyecto_as.newFicha.interactor.NewFichaInteractorImpl;
 import com.jmarser.proyecto_as.newFicha.presenter.NewFichaPresenter;
 import com.jmarser.proyecto_as.newFicha.presenter.NewFichaPresenterImpl;
 import com.jmarser.proyecto_as.utils.Constantes;
+import java.util.Calendar;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import es.dmoral.toasty.Toasty;
@@ -30,8 +32,6 @@ public class NewFichaFragment extends Fragment implements View.OnClickListener, 
 
     @BindView(R.id.sp_horas)
     Spinner sp_horas;
-    @BindView(R.id.selector_fecha)
-    DatePicker selector_fecha;
     @BindView(R.id.til_descripcion_nueva_ficha)
     TextInputLayout til_descripcion;
     @BindView(R.id.til_observaciones_nueva_ficha)
@@ -40,6 +40,10 @@ public class NewFichaFragment extends Fragment implements View.OnClickListener, 
     CheckBox cb_newFicha;
     @BindView(R.id.btn_nueva_ficha)
     Button btn_newFicha;
+
+    @BindView(R.id.tv_selectFecha)
+    TextView tv_fecha;
+    private DatePickerDialog.OnDateSetListener selectFecha;
 
     private Alumno alumno;
     private NewFichaPresenter presenter;
@@ -65,6 +69,14 @@ public class NewFichaFragment extends Fragment implements View.OnClickListener, 
         }
         presenter = new NewFichaPresenterImpl(this, new NewFichaInteractorImpl(), getContext());
 
+
+
+        selectFecha = new DatePickerDialog.OnDateSetListener(){
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                tv_fecha.setText(dayOfMonth+"/"+month+"/"+year);
+            }
+        };
     }
 
     @Override
@@ -73,6 +85,8 @@ public class NewFichaFragment extends Fragment implements View.OnClickListener, 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_new_ficha, container, false);
         ButterKnife.bind(this, view);
+
+        tv_fecha.setOnClickListener(this);
 
         return view;
     }
@@ -96,10 +110,17 @@ public class NewFichaFragment extends Fragment implements View.OnClickListener, 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_nueva_ficha:
-                String fecha = selector_fecha.getDayOfMonth() + "/"+
-                        (selector_fecha.getMonth() + 1) + "/" + selector_fecha.getYear();
-                presenter.validarCampos(sp_horas, fecha, til_descripcion, til_observaciones, cb_newFicha, alumno);
+                presenter.validarCampos(sp_horas, tv_fecha, til_descripcion, til_observaciones, cb_newFicha, alumno);
                 break;
+            case R.id.tv_selectFecha:
+                Calendar cal = Calendar.getInstance();
+                int anio = cal.get(Calendar.YEAR);
+                int mes = cal.get(Calendar.MONTH);
+                int dia = cal.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), android.R.style.Theme_Holo_Light_Dialog_MinWidth, selectFecha, anio, mes, dia);
+                datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                datePickerDialog.show();
         }
     }
 
@@ -152,5 +173,11 @@ public class NewFichaFragment extends Fragment implements View.OnClickListener, 
     @Override
     public void unknowError(String mensaje) {
         Toasty.error(getContext(), mensaje, Toasty.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState){
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(Constantes.KEY_ALUMNO, alumno);
     }
 }

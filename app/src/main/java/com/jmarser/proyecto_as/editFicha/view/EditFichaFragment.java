@@ -1,5 +1,8 @@
 package com.jmarser.proyecto_as.editFicha.view;
 
+import android.app.DatePickerDialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,6 +17,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
@@ -24,6 +28,8 @@ import com.jmarser.proyecto_as.editFicha.presenter.EditFichaPresenterImpl;
 import com.jmarser.proyecto_as.model.Ficha;
 import com.jmarser.proyecto_as.utils.Constantes;
 
+import java.util.Calendar;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import es.dmoral.toasty.Toasty;
@@ -33,8 +39,6 @@ public class EditFichaFragment extends Fragment implements View.OnClickListener,
 
     @BindView(R.id.sp_horas_new)
     Spinner sp_horas_new;
-    @BindView(R.id.selector_fecha_new)
-    DatePicker selector_fecha_new;
     @BindView(R.id.til_editar_descripcion_ficha)
     TextInputLayout til_editar_descripcion_ficha;
     @BindView(R.id.til_editar_observaciones_ficha)
@@ -43,9 +47,12 @@ public class EditFichaFragment extends Fragment implements View.OnClickListener,
     CheckBox cb_fichaFirma;
     @BindView(R.id.btn_editar_ficha)
     Button btn_editar_ficha;
+    @BindView(R.id.tv_newFecha)
+    TextView tv_newFecha;
 
     private Ficha ficha;
     private EditFichaPresenter presenter;
+    private DatePickerDialog.OnDateSetListener selectedFecha;
 
     public EditFichaFragment() {
         // Required empty public constructor
@@ -66,6 +73,13 @@ public class EditFichaFragment extends Fragment implements View.OnClickListener,
             ficha = getArguments().getParcelable(Constantes.KEY_FICHA);
         }
         presenter = new EditFichaPresenterImpl(getContext(), this, new EditFichaInteractorImpl());
+
+        selectedFecha = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                tv_newFecha.setText(dayOfMonth+"/"+month+"/"+year);
+            }
+        };
     }
 
     @Override
@@ -74,6 +88,8 @@ public class EditFichaFragment extends Fragment implements View.OnClickListener,
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_edit_ficha, container, false);
         ButterKnife.bind(this, view);
+
+        tv_newFecha.setOnClickListener(this);
 
         return view;
     }
@@ -97,19 +113,25 @@ public class EditFichaFragment extends Fragment implements View.OnClickListener,
         til_editar_observaciones_ficha.getEditText().setText(ficha.getObservaciones());
         cb_fichaFirma.setChecked(ficha.isFirmaAlumno());
         sp_horas_new.setSelection(ficha.getHoras());
+        tv_newFecha.setText(ficha.getFecha());
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn_editar_ficha:
-                //obtenemos la nueva fecha de la ficha
-                String newFecha = selector_fecha_new.getDayOfMonth()+
-                        "/"+selector_fecha_new.getMonth()+
-                        "/"+selector_fecha_new.getYear();
-
-                presenter.validarCampos(sp_horas_new, newFecha,til_editar_descripcion_ficha,
+                presenter.validarCampos(sp_horas_new, tv_newFecha,til_editar_descripcion_ficha,
                         til_editar_observaciones_ficha,cb_fichaFirma,ficha);
+                break;
+            case R.id.tv_newFecha:
+                Calendar cal = Calendar.getInstance();
+                int anio = cal.get(Calendar.YEAR);
+                int mes = cal.get(Calendar.MONTH);
+                int dia = cal.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), android.R.style.Theme_Holo_Light_Dialog_MinWidth, selectedFecha, anio, mes, dia);
+                datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                datePickerDialog.show();
                 break;
         }
     }
@@ -153,4 +175,11 @@ public class EditFichaFragment extends Fragment implements View.OnClickListener,
     public void unknowError(String mensaje) {
         Toasty.error(getContext(),mensaje,Toasty.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState){
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(Constantes.KEY_FICHA, ficha);
+    }
+
 }

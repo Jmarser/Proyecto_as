@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.text.TextUtils;
 import android.widget.CheckBox;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 
@@ -26,10 +27,10 @@ public class EditFichaPresenterImpl implements EditFichaPresenter, EditFichaInte
     }
 
     @Override
-    public void validarCampos(Spinner sp_horas, String newFecha, TextInputLayout descripcion, TextInputLayout observaciones, CheckBox firmado, Ficha ficha) {
+    public void validarCampos(Spinner sp_horas, TextView newFecha, TextInputLayout descripcion, TextInputLayout observaciones, CheckBox firmado, Ficha ficha) {
         if(sp_horas.getSelectedItemPosition() != 0){
             int horas = Integer.parseInt(sp_horas.getSelectedItem().toString());
-            if(!TextUtils.isEmpty(newFecha)){
+            if(!newFecha.getText().toString().isEmpty()){
                 if(!descripcion.getEditText().getText().toString().isEmpty()){
                     String descrip = descripcion.getEditText().getText().toString();
                     if(firmado.isChecked()){
@@ -38,7 +39,7 @@ public class EditFichaPresenterImpl implements EditFichaPresenter, EditFichaInte
                             newFicha.setId(ficha.getId());
                             newFicha.setAlumnoId(ficha.getAlumnoId());
                             newFicha.setHoras(horas);
-                            newFicha.setFecha(newFecha);
+                            newFicha.setFecha(newFecha.getText().toString());
                             newFicha.setDescripcion(descrip);
                             newFicha.setObservaciones(observaciones.getEditText().getText().toString());
                             newFicha.setFirmaAlumno(firmado.isChecked());

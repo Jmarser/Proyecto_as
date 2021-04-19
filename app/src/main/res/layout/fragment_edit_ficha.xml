@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".editFicha.view.EditFichaFragment"
-    android:background="@color/md_grey_200">
+    android:background="@drawable/degradado_registro">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/scrollView4"
@@ -36,38 +36,26 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sp_horas_new" />
 
-        <DatePicker
-            android:id="@+id/selector_fecha_new"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="25dp"
-            android:headerBackground="@color/md_blue_500"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_info_fecha" />
-
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_editar_descripcion_ficha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="16dp"
             app:helperText="Descripción de las tareas realizadas"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/selector_fecha_new">
+            app:layout_constraintTop_toBottomOf="@+id/tv_info_fecha">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="top|left"
                 android:hint="@string/descripcion"
                 android:inputType="textPersonName|textMultiLine"
                 android:lines="1"
-                android:maxLines="20"
-                android:gravity="top|left"/>
+                android:maxLines="20" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -113,6 +101,20 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cb_Ficha_firma" />
+
+        <TextView
+            android:id="@+id/tv_newFecha"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="32dp"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tv_info_fecha"
+            app:layout_constraintTop_toBottomOf="@+id/sp_horas_new" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

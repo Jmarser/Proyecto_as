@@ -32,6 +32,8 @@ public class FichaFragment extends Fragment implements View.OnClickListener, Fic
 
     @BindView(R.id.tv_horas_ficha)
     TextView tv_horas_ficha;
+    @BindView(R.id.tv_fecha_ficha)
+    TextView tv_fecha_ficha;
     @BindView(R.id.tv_descripcion_ficha)
     TextView tv_descripcion_ficha;
     @BindView(R.id.tv_observaciones_ficha)
@@ -96,6 +98,7 @@ public class FichaFragment extends Fragment implements View.OnClickListener, Fic
         tv_descripcion_ficha.setText(ficha.getDescripcion());
         tv_observaciones_ficha.setText(ficha.getObservaciones());
         tv_horas_ficha.setText(String.valueOf(ficha.getHoras()));
+        tv_fecha_ficha.setText(ficha.getFecha());
         cb_firmaAlumno.setChecked(ficha.isFirmaAlumno());
         cb_firmaProfesor.setChecked(ficha.isFirmaProf());
         cb_firmaTutor.setChecked(ficha.isFirmaTutor());
@@ -162,5 +165,11 @@ public class FichaFragment extends Fragment implements View.OnClickListener, Fic
     @Override
     public void fileSigned(String mensaje) {
         Toasty.info(getContext(),mensaje, Toasty.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState){
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(Constantes.KEY_FICHA, ficha);
     }
 }

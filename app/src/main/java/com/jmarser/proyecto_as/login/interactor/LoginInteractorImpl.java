@@ -20,8 +20,8 @@ public class LoginInteractorImpl implements LoginInteractor {
 
         Login login = new Login();
         login.setEmail(email);
-        login.setPassword(encriptador.encriptar(password, CLAVE_ENCRIPTACION));
-        //login.setPassword(password);
+        //login.setPassword(encriptador.encriptar(password, CLAVE_ENCRIPTACION));
+        login.setPassword(password);
         /*hacemos una llamada a nuestro webService genérico con patron singleton y en la misma linea
         * llamamos al método que necesitamos, en este caso login*/
         Call<Login> call = WebService.getInstance().createWsApi(WsApi.class).login(login);

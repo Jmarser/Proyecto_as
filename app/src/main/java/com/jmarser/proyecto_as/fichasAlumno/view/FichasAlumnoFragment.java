@@ -211,6 +211,9 @@ public class FichasAlumnoFragment extends Fragment implements FichasAlumnoView, 
                 swipe.setRefreshing(false); //detenemos la barra de progreso circular del refresh
                 if(!SharedPrefManager.getInstance(getContext()).getUsuario().getRol().equalsIgnoreCase(Constantes.ROL_ALUMNO)){
                     fab_nueva_ficha.hide();
+                }else{
+                    fab_nueva_ficha.show();
+                    ocultarFloating();
                 }
             }
         });

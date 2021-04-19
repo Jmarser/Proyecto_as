@@ -43,4 +43,5 @@ public interface WsApi {
 
     @PUT(Constantes.API + Constantes.ENDPOINT_UPDATE_FICHA)
     Call<Ficha> firmarFicha(@Path("id")Long id, @Body Ficha ficha);
+
 }

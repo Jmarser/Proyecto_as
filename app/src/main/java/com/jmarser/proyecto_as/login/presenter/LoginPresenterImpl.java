@@ -39,7 +39,7 @@ public class LoginPresenterImpl implements LoginPresenter, LoginInteractor.onLog
         /*guardamos los datos de login en sharedPreferences, con lo que si el usuario no hace logout
         * la proxima vez que inicie la aplicación se cargara desde la pantalla de splash y no tendrá
         * que volver a insertar los datos de login.*/
-        login.setPassword(encriptador.desencriptar(login.getPassword(), CLAVE_ENCRIPTACION));
+        //login.setPassword(encriptador.desencriptar(login.getPassword(), CLAVE_ENCRIPTACION));
         SharedPrefManager.getInstance(context).guardarUsuario(login);
         view.goToView(login.getRol());
 

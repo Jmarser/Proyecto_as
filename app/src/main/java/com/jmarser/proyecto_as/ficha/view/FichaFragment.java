@@ -2,6 +2,8 @@ package com.jmarser.proyecto_as.ficha.view;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -13,12 +15,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jmarser.proyecto_as.R;
+import com.jmarser.proyecto_as.editFicha.view.EditFichaFragment;
 import com.jmarser.proyecto_as.ficha.interactor.FichaFragmentInteractorImpl;
 import com.jmarser.proyecto_as.ficha.presenter.FichaFragmentPresenter;
 import com.jmarser.proyecto_as.ficha.presenter.FichaFragmentPresenterImpl;
 import com.jmarser.proyecto_as.model.Ficha;
 import com.jmarser.proyecto_as.mySharedPref.SharedPrefManager;
 import com.jmarser.proyecto_as.utils.Constantes;
+import com.jmarser.proyecto_as.utils.NavigationFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,6 +44,8 @@ public class FichaFragment extends Fragment implements View.OnClickListener, Fic
     CheckBox cb_firmaTutor;
     @BindView(R.id.btn_firmar_ficha)
     Button btn_firmar_ficha;
+    @BindView(R.id.btn_editar)
+    Button btn_editarFicha;
 
     private Ficha ficha;
     private FichaFragmentPresenter presenter;
@@ -74,16 +80,19 @@ public class FichaFragment extends Fragment implements View.OnClickListener, Fic
         View view = inflater.inflate(R.layout.fragment_ficha, container, false);
         ButterKnife.bind(this, view);
 
-        btn_firmar_ficha.setOnClickListener(this);
-
-        initView();
         return view;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        btn_firmar_ficha.setOnClickListener(this);
+        btn_editarFicha.setOnClickListener(this);
+
+        initView();
+    }
+
     private void initView() {
-        cb_firmaAlumno.setClickable(false);
-        cb_firmaProfesor.setClickable(false);
-        cb_firmaTutor.setClickable(false);
         tv_descripcion_ficha.setText(ficha.getDescripcion());
         tv_observaciones_ficha.setText(ficha.getObservaciones());
         tv_horas_ficha.setText(String.valueOf(ficha.getHoras()));
@@ -91,17 +100,10 @@ public class FichaFragment extends Fragment implements View.OnClickListener, Fic
         cb_firmaProfesor.setChecked(ficha.isFirmaProf());
         cb_firmaTutor.setChecked(ficha.isFirmaTutor());
 
-        if(SharedPrefManager.getInstance(getContext()).getUsuario().getRol().equalsIgnoreCase(Constantes.ROL_ALUMNO)){
-            btn_firmar_ficha.setVisibility(View.GONE);
-        }else{
-            btn_firmar_ficha.setVisibility(View.VISIBLE);
-        }
+        initButtons();
     }
 
     private void initView(Ficha aux){
-        cb_firmaAlumno.setClickable(false);
-        cb_firmaProfesor.setClickable(false);
-        cb_firmaTutor.setClickable(false);
         tv_descripcion_ficha.setText(aux.getDescripcion());
         tv_observaciones_ficha.setText(aux.getObservaciones());
         tv_horas_ficha.setText(String.valueOf(aux.getHoras()));
@@ -109,10 +111,19 @@ public class FichaFragment extends Fragment implements View.OnClickListener, Fic
         cb_firmaProfesor.setChecked(aux.isFirmaProf());
         cb_firmaTutor.setChecked(aux.isFirmaTutor());
 
+        initButtons();
+    }
+
+    private void initButtons(){
+        cb_firmaAlumno.setClickable(false);
+        cb_firmaProfesor.setClickable(false);
+        cb_firmaTutor.setClickable(false);
         if(SharedPrefManager.getInstance(getContext()).getUsuario().getRol().equalsIgnoreCase(Constantes.ROL_ALUMNO)){
             btn_firmar_ficha.setVisibility(View.GONE);
+            btn_editarFicha.setVisibility(View.VISIBLE);
         }else{
             btn_firmar_ficha.setVisibility(View.VISIBLE);
+            btn_editarFicha.setVisibility(View.GONE);
         }
     }
 
@@ -125,6 +136,9 @@ public class FichaFragment extends Fragment implements View.OnClickListener, Fic
                 }else if(SharedPrefManager.getInstance(getContext()).getUsuario().getRol().equalsIgnoreCase(Constantes.ROL_TUTOR)){
                     presenter.checkTutorSignature(ficha);
                 }
+                break;
+            case R.id.btn_editar:
+                NavigationFragment.replaceFragment(getActivity().getSupportFragmentManager(), EditFichaFragment.newInstance(ficha), EditFichaFragment.class.getName());
                 break;
         }
     }

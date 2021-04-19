@@ -96,8 +96,8 @@ public class NewFichaFragment extends Fragment implements View.OnClickListener, 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_nueva_ficha:
-                String fecha = String.valueOf(selector_fecha.getDayOfMonth()) + "/"+
-                        String.valueOf((selector_fecha.getMonth()+1)) + "/" + String.valueOf(selector_fecha.getYear());
+                String fecha = selector_fecha.getDayOfMonth() + "/"+
+                        (selector_fecha.getMonth() + 1) + "/" + selector_fecha.getYear();
                 presenter.validarCampos(sp_horas, fecha, til_descripcion, til_observaciones, cb_newFicha, alumno);
                 break;
         }
@@ -140,7 +140,7 @@ public class NewFichaFragment extends Fragment implements View.OnClickListener, 
 
     @Override
     public void saveFichaOk(String mensaje) {
-        Toasty.error(getContext(), mensaje, Toasty.LENGTH_SHORT).show();
+        Toasty.success(getContext(), mensaje, Toasty.LENGTH_SHORT).show();
         limpiarCampos();
     }
 

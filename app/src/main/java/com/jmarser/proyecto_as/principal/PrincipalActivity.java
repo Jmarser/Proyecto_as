@@ -10,21 +10,13 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.jmarser.proyecto_as.R;
 import com.jmarser.proyecto_as.alumnos.view.AlumnosFragment;
-import com.jmarser.proyecto_as.cuenta.CuentaFragment;
+import com.jmarser.proyecto_as.cuenta.view.CuentaFragment;
 import com.jmarser.proyecto_as.errorUsuario.ErrorUsuarioFragment;
 import com.jmarser.proyecto_as.fichasAlumno.view.FichasAlumnoFragment;
 import com.jmarser.proyecto_as.login.view.LoginActivity;
@@ -116,7 +108,7 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
                 initFragment(SharedPrefManager.getInstance(this).getUsuario().getRol());
                 break;
             case R.id.menu_cuenta:
-                getSupportActionBar().setTitle("Cuenta");
+                getSupportActionBar().setTitle("Cambiar password");
                 NavigationFragment.replaceFragment(getSupportFragmentManager(), CuentaFragment.newInstance(), CuentaFragment.class.getName());
                 break;
             case R.id.menu_desarrollador:

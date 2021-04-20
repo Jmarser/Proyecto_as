@@ -48,5 +48,9 @@
     <string name="open_drawer">open drawer</string>
     <string name="close_drawer">close drawer</string>
     <string name="modificar_ficha">MODIFICAR FICHA</string>
+    <string name="password_actual">Password actual</string>
+    <string name="nuevo_password">Nuevo password</string>
+    <string name="repita_nuevo_password">Repita nuevo password</string>
+    <string name="cambiar">Cambiar</string>
 
 </resources>

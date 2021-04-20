@@ -11,8 +11,8 @@
             android:checked="true"/>
         <item
             android:id="@+id/menu_cuenta"
-            android:icon="@drawable/ic_menu_account_24"
-            android:title="Cuenta" />
+            android:icon="@drawable/ic_settings_24"
+            android:title="Ajustes" />
 
 
     </group>

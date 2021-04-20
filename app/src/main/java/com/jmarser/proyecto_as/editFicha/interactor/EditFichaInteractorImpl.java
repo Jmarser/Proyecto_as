@@ -21,6 +21,8 @@ public class EditFichaInteractorImpl implements EditFichaInteractor{
                     listener.success();
                 }else if(response.code() == 404){
                     listener.errorEditFicha(response.message());
+                }else if(response.code() == 409) {
+                    listener.errorFichaExist(response.message());
                 }else{
                     listener.unknowError(response.message());
                 }

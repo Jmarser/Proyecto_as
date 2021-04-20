@@ -23,6 +23,7 @@ public class Constantes {
     public static final String ENDPOINT_SAVE_FICHA = "/save_ficha";
     public static final String ENDPOINT_GET_ALUMNO_ID = "/alumno/{id}";
     public static final String ENDPOINT_UPDATE_FICHA = "/update_ficha/{id}";
+    public static final String ENDPOINT_UPDATE_PASS = "/update_login/{id}";
 
     /*Constantes roles*/
     public static final String ROL_ALUMNO = "Alumno";
@@ -35,5 +36,6 @@ public class Constantes {
     /*Keys parcelable, para el paso de objetos entre fragments y activities*/
     public static final String KEY_ALUMNO = "alumno";
     public static final String KEY_FICHA = "ficha";
+
 
 }

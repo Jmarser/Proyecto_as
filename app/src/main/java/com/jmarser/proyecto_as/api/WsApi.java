@@ -35,13 +35,19 @@ public interface WsApi {
     @POST(Constantes.API + Constantes.ENDPOINT_GET_TUTOR)
     Call<Tutor> getTutor(@Body Tutor tutor);
 
+    //Llamada POST con la que guardaremos una nueva ficha en la tabla
     @POST(Constantes.API + Constantes.ENDPOINT_SAVE_FICHA)
     Call<Ficha> saveFicha(@Body Ficha ficha);
 
+    //Llamada GET con la que obtenemos un alumno de la base de datos por su id
     @GET(Constantes.API + Constantes.ENDPOINT_GET_ALUMNO_ID)
     Call<Alumno> getAlumnoById(@Path("id") Long id);
 
+    //Llamada de actualización de los datos de una ficha
     @PUT(Constantes.API + Constantes.ENDPOINT_UPDATE_FICHA)
     Call<Ficha> firmarFicha(@Path("id")Long id, @Body Ficha ficha);
 
+    //Llamada de modificación del password del usuario.
+    @PUT(Constantes.API + Constantes.ENDPOINT_UPDATE_PASS)
+    Call<Login> modificarPass(@Path("id")Long id, @Body Login login);
 }

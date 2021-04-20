@@ -60,7 +60,7 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
 
         nav_view.setNavigationItemSelectedListener(this);//funcionalidad a los botones del menu lateral
 
-        //en el caso de que se guire la pantalla volvemos al fragment principal
+        //en el caso de que se gire la pantalla volvemos al fragment principal
         if(savedInstanceState == null){
             initFragment(SharedPrefManager.getInstance(this).getUsuario().getRol());
             nav_view.setCheckedItem(R.id.menu_home);
@@ -112,8 +112,8 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
                 NavigationFragment.replaceFragment(getSupportFragmentManager(), CuentaFragment.newInstance(), CuentaFragment.class.getName());
                 break;
             case R.id.menu_desarrollador:
-                getSupportActionBar().setTitle("Desarrollador");
-
+                getSupportActionBar().setTitle("Acerca de...");
+                NavigationFragment.replaceFragment(getSupportFragmentManager(), AcercaDeFragment.newInstance(), AcercaDeFragment.class.getName());
                 break;
             case R.id.menu_logout:
                 logout();

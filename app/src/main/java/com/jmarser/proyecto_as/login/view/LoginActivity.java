@@ -80,7 +80,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView, View.
     @Override
     public void unknowError(String mensaje) {
         limpiarCampos();
-        Toast.makeText(this, mensaje,Toast.LENGTH_SHORT).show();
+        Toasty.error(this, mensaje, Toasty.LENGTH_SHORT).show();
     }
 
     @Override

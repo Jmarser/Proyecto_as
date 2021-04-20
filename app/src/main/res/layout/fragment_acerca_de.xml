@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".principal.AcercaDeFragment"
+    android:background="@drawable/degradado_registro">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_info_version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/versi_n_app_1"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_info_app"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:text="@string/descripci_n_de_la_app"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_info_version" />
+
+        <TextView
+            android:id="@+id/tv_detalle_app"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:text="@string/descripcionApp"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_info_app" />
+
+        <TextView
+            android:id="@+id/tv_info_contacto"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/contacto"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_detalle_app" />
+
+        <TextView
+            android:id="@+id/tv_info_desarrollador"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/desarrollador"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_info_contacto"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_info_nomDev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/juan_m_rquez_serrano"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/tv_info_desarrollador"
+            app:layout_constraintTop_toBottomOf="@+id/tv_info_contacto" />
+
+        <TextView
+            android:id="@+id/tv_info_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/email"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_info_desarrollador" />
+
+        <TextView
+            android:id="@+id/tv_email_contacto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/aenur32_gmail_com"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/tv_info_email"
+            app:layout_constraintTop_toBottomOf="@+id/tv_info_nomDev" />
+
+        <TextView
+            android:id="@+id/tv_info_portfolio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/portfolio"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_info_email" />
+
+        <TextView
+            android:id="@+id/tv_direc_portfolio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/www_portfolio_com"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/tv_info_portfolio"
+            app:layout_constraintTop_toBottomOf="@+id/tv_email_contacto" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

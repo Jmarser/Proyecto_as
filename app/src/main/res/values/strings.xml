@@ -52,5 +52,16 @@
     <string name="nuevo_password">Nuevo password</string>
     <string name="repita_nuevo_password">Repita nuevo password</string>
     <string name="cambiar">Cambiar</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="versi_n_app_1">Versión app: 1</string>
+    <string name="juan_m_rquez_serrano">Juan Márquez Serrano</string>
+    <string name="desarrollador">Desarrollador:</string>
+    <string name="contacto">CONTACTO</string>
+    <string name="aenur32_gmail_com">Aenur32@gmail.com</string>
+    <string name="portfolio">Portfolio:</string>
+    <string name="www_portfolio_com">www.portfolio.com</string>
+    <string name="descripci_n_de_la_app">Descripción de la app</string>
+    <string name="descripcionApp">Aplicación para la creación, edición y almacenamiento de las fichas diarias a realizar durante la FCT.<br/>Las fichas son almacenadas en una base de datos remota gestionada por una API Rest.<br/>Las fichas son creadas y editadas por los alumnos y firmadas por los profesores.</string>
 
 </resources>

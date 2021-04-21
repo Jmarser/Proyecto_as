@@ -2,6 +2,7 @@ package com.jmarser.proyecto_as.fichasAlumno.interactor;
 
 import android.content.Context;
 
+import com.jmarser.proyecto_as.R;
 import com.jmarser.proyecto_as.api.WebService;
 import com.jmarser.proyecto_as.api.WsApi;
 import com.jmarser.proyecto_as.model.Alumno;
@@ -31,15 +32,15 @@ public class FichasAlumnoInteractorImpl implements FichasAlumnoInteractor{
                 if(response.code() == 200){
                     listener.success(response.body());
                 }else if(response.code() == 404){
-                    listener.errorAlumno(response.message());
+                    listener.errorAlumno(context.getResources().getString(R.string.UserNotFound));
                 }else{
-                    listener.unknowError(response.message());
+                    listener.unknowError(context.getResources().getString(R.string.UnknowError));
                 }
             }
 
             @Override
             public void onFailure(Call<Alumno> call, Throwable t) {
-                listener.unknowError("Error desconocido del servidor.");
+                listener.unknowError(context.getResources().getString(R.string.ErrorUnknowServer));
             }
         });
     }
@@ -53,15 +54,15 @@ public class FichasAlumnoInteractorImpl implements FichasAlumnoInteractor{
                 if(response.code() == 200){
                     listener.success(response.body());
                 }else if(response.code() == 404){
-                    listener.errorAlumno(response.message());
+                    listener.errorAlumno(context.getResources().getString(R.string.UserNotFound));
                 }else{
-                    listener.unknowError(response.message());
+                    listener.unknowError(context.getResources().getString(R.string.UnknowError));
                 }
             }
 
             @Override
             public void onFailure(Call<Alumno> call, Throwable t) {
-                listener.unknowError("Error desconocido del servidor.");
+                listener.unknowError(context.getResources().getString(R.string.ErrorUnknowServer));
             }
         });
     }

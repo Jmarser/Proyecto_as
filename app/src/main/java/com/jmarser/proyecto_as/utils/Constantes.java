@@ -37,5 +37,6 @@ public class Constantes {
     public static final String KEY_ALUMNO = "alumno";
     public static final String KEY_FICHA = "ficha";
 
-
+    /*Clave de encriptacion AES*/
+    public static final String CLAVE_ENCRIPTACION = "gestiondelaspracticas";
 }

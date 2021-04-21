@@ -44,7 +44,7 @@ public class CuentaFragment extends Fragment implements View.OnClickListener, Cu
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        presenter = new CuentaPresenterImpl(getContext(), this, new CuentaInteractorImpl());
+        presenter = new CuentaPresenterImpl(getContext(), this, new CuentaInteractorImpl(getContext()));
     }
 
     @Override

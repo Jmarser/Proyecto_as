@@ -32,7 +32,7 @@ public class SplashInteractorImpl implements SplashInteractor{
                 } else if (response.code() == 404) {
                     listener.errorUser(context.getResources().getString(R.string.unregistered_user));
                 } else if(response.code() ==409) {
-                    listener.enabledUser("");
+                    listener.enabledUser(context.getResources().getString(R.string.EnabledUser));
                 }else{
                     listener.unknownError(context.getResources().getString(R.string.unknown_error));
                 }

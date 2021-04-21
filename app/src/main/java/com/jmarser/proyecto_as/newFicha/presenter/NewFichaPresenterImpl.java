@@ -31,7 +31,7 @@ public class NewFichaPresenterImpl implements NewFichaPresenter, NewFichaInterac
 
     @Override
     public void success() {
-        view.saveFichaOk("Ficha guardada correctamente.");
+        view.saveFichaOk(context.getResources().getString(R.string.SaveFichaOk));
     }
 
     @Override

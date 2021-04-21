@@ -61,5 +61,22 @@
     <string name="www_portfolio_com">www.portfolio.com</string>
     <string name="descripci_n_de_la_app">Descripción de la app</string>
     <string name="descripcionApp">Aplicación para la creación, edición y almacenamiento de las fichas diarias a realizar durante la FCT.<br/>Las fichas son almacenadas en una base de datos remota gestionada por una API Rest.<br/>Las fichas son creadas y editadas por los alumnos y firmadas por los profesores.</string>
+    <string name="ErrorUnknowServer">Error desconocido del servidor.</string>
+    <string name="UnknowError">Ocurrio un error desconocido</string>
+    <string name="TutorDesconocido">Tutor desconocido</string>
+    <string name="UserNotFound">Usuario no encontrado</string>
+    <string name="RequiredField">Campo obligatorio</string>
+    <string name="IncorrectPassword">Password incorrecto</string>
+    <string name="PasswordNotMatch">Los password no coinciden</string>
+    <string name="PasswordChangeOk">Password cambiado correctamente.</string>
+    <string name="ConfirmChange">Confirmar modificación</string>
+    <string name="ModifiedCorrectly">Modificación correcta</string>
+    <string name="FichaNotFound">Ficha no encontrada.</string>
+    <string name="FichaExist">Ya hay una ficha con esa fecha.</string>
+    <string name="FichaChecked">La ficha ya esta firmada</string>
+    <string name="EnabledUser">Usuario dado de baja.</string>
+    <string name="IncorrectEmail">Email incorrecto</string>
+    <string name="ErrorSaveFicha">Error al guardar la ficha</string>
+    <string name="SaveFichaOk">Ficha guardada correctamente</string>
 
 </resources>

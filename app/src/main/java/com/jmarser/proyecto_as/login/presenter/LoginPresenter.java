@@ -6,7 +6,4 @@ public interface LoginPresenter {
 
     void validarCredenciales(TextInputLayout til_email, TextInputLayout til_password);
 
-    void showErrorUser(String mensaje);
-
-
 }

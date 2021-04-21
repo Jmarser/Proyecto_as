@@ -86,7 +86,7 @@ public class FichasAlumnoFragment extends Fragment implements FichasAlumnoView, 
         presenter = new FichasAlumnoPresenterImpl(this, new FichasAlumnoInteractorImpl(getContext()), getContext());
 
         if (alumno == null) {
-            /*En este caso se ha loga do un alumno, por lo que hay que obtener sus fichas de la base
+            /*En este caso se ha logado un alumno, por lo que hay que obtener sus fichas de la base
              de datos, además debemos mostrar el boton para crear una nueva ficha*/
             presenter.getAlumno();
             fab_nueva_ficha.show();

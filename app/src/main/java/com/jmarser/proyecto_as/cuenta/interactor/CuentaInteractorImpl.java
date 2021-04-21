@@ -1,5 +1,8 @@
 package com.jmarser.proyecto_as.cuenta.interactor;
 
+import android.content.Context;
+
+import com.jmarser.proyecto_as.R;
 import com.jmarser.proyecto_as.api.WebService;
 import com.jmarser.proyecto_as.api.WsApi;
 import com.jmarser.proyecto_as.model.Login;
@@ -9,6 +12,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class CuentaInteractorImpl implements CuentaInteractor{
+
+    private Context context;
+
+    public CuentaInteractorImpl(Context context) {
+        this.context = context;
+    }
 
     @Override
     public void tryChangePassword(Login login, changePasswordListener listener) {
@@ -20,15 +29,15 @@ public class CuentaInteractorImpl implements CuentaInteractor{
                 if(response.code() == 200){
                     listener.success(response.body());
                 }else if(response.code() == 404){
-                    listener.errorUnknowCuenta("El usuario no esta registrado.");
+                    listener.errorUnknowCuenta(context.getResources().getString(R.string.UserNotFound));
                 }else{
-                    listener.unknowError("Error desconocido.");
+                    listener.unknowError(context.getResources().getString(R.string.UnknowError));
                 }
             }
 
             @Override
             public void onFailure(Call<Login> call, Throwable t) {
-                listener.errorUnknowCuenta("Ocurrio un error desconocido.");
+                listener.errorUnknowCuenta(context.getResources().getString(R.string.ErrorUnknowServer));
             }
         });
     }

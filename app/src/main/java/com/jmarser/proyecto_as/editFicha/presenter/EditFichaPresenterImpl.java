@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 
 import com.google.android.material.textfield.TextInputLayout;
+import com.jmarser.proyecto_as.R;
 import com.jmarser.proyecto_as.editFicha.interactor.EditFichaInteractor;
 import com.jmarser.proyecto_as.editFicha.view.EditFichaView;
 import com.jmarser.proyecto_as.model.Ficha;
@@ -47,7 +48,7 @@ public class EditFichaPresenterImpl implements EditFichaPresenter, EditFichaInte
                             newFicha.setFirmaTutor(false);
                             if(ficha.isFirmaProf() | ficha.isFirmaTutor()){
                                 AlertDialog.Builder dialog = new AlertDialog.Builder(context)
-                                        .setTitle("Confirmar modificación")
+                                        .setTitle(context.getResources().getString(R.string.ConfirmChange))//"Confirmar modificación"
                                         .setMessage("Al modificar la ficha se borraran las firmas de los tutores.")
                                         .setCancelable(false)
                                         .setPositiveButton(context.getResources().getString(android.R.string.yes), new DialogInterface.OnClickListener() {
@@ -89,7 +90,7 @@ public class EditFichaPresenterImpl implements EditFichaPresenter, EditFichaInte
 
     @Override
     public void success() {
-        view.editFichaOk("Ficha modificada correctamente.");
+        view.editFichaOk(context.getResources().getString(R.string.ModifiedCorrectly));
     }
 
     @Override

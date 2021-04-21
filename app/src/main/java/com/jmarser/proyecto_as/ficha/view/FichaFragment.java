@@ -72,7 +72,7 @@ public class FichaFragment extends Fragment implements View.OnClickListener, Fic
             ficha = getArguments().getParcelable(Constantes.KEY_FICHA);
         }
 
-        presenter = new FichaFragmentPresenterImpl(getContext(),this, new FichaFragmentInteractorImpl());
+        presenter = new FichaFragmentPresenterImpl(getContext(),this, new FichaFragmentInteractorImpl(getContext()));
     }
 
     @Override
@@ -118,9 +118,11 @@ public class FichaFragment extends Fragment implements View.OnClickListener, Fic
     }
 
     private void initButtons(){
+        //Deshabilitamos el click en los checkBox
         cb_firmaAlumno.setClickable(false);
         cb_firmaProfesor.setClickable(false);
         cb_firmaTutor.setClickable(false);
+        //Dependiendo del rol del usuario mostramos u ocultamos el botón de firmar y el de editar
         if(SharedPrefManager.getInstance(getContext()).getUsuario().getRol().equalsIgnoreCase(Constantes.ROL_ALUMNO)){
             btn_firmar_ficha.setVisibility(View.GONE);
             btn_editarFicha.setVisibility(View.VISIBLE);

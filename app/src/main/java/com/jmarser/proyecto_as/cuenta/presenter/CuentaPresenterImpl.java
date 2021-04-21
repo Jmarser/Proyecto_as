@@ -3,6 +3,7 @@ package com.jmarser.proyecto_as.cuenta.presenter;
 import android.content.Context;
 
 import com.google.android.material.textfield.TextInputLayout;
+import com.jmarser.proyecto_as.R;
 import com.jmarser.proyecto_as.cuenta.interactor.CuentaInteractor;
 import com.jmarser.proyecto_as.cuenta.view.CuentaView;
 import com.jmarser.proyecto_as.model.Login;
@@ -46,12 +47,12 @@ public class CuentaPresenterImpl implements CuentaPresenter, CuentaInteractor.ch
                                             view.infoEqualsPass("El nuevo password es igual al actual.");
                                         }
                                     } else {
-                                        view.errorEqualsPass("Los password no coinciden.");
-                                        newPassword.getEditText().setError("Los password no coinciden.");
+                                        view.errorEqualsPass(context.getResources().getString(R.string.PasswordNotMatch));
+                                        newPassword.getEditText().setError(context.getResources().getString(R.string.PasswordNotMatch));
                                     }
                                 } else {
                                     passwordActual.requestFocus();
-                                    passwordActual.getEditText().setError("Password incorrecto.");
+                                    passwordActual.getEditText().setError(context.getResources().getString(R.string.IncorrectPassword));
                                 }
                             } else {
                                 newPasswordRep.requestFocus();
@@ -63,19 +64,19 @@ public class CuentaPresenterImpl implements CuentaPresenter, CuentaInteractor.ch
                         }
                     } else {
                         passwordActual.requestFocus();
-                        passwordActual.getEditText().setError("Password incorrecto");
+                        passwordActual.getEditText().setError(context.getResources().getString(R.string.IncorrectPassword));
                     }
                 } else {
                     newPasswordRep.requestFocus();
-                    newPasswordRep.getEditText().setError("Campo obligatorio");
+                    newPasswordRep.getEditText().setError(context.getResources().getString(R.string.RequiredField));
                 }
             } else {
                 newPassword.requestFocus();
-                newPassword.getEditText().setError("Campo obligatorio");
+                newPassword.getEditText().setError(context.getResources().getString(R.string.RequiredField));
             }
         } else {
             passwordActual.requestFocus();
-            passwordActual.getEditText().setError("Campo obligatorio");
+            passwordActual.getEditText().setError(context.getResources().getString(R.string.RequiredField));//campo obligatorio
         }
     }
 
@@ -83,7 +84,7 @@ public class CuentaPresenterImpl implements CuentaPresenter, CuentaInteractor.ch
     public void success(Login login) {
         SharedPrefManager.getInstance(context).limpiarShared();//limpiamos los datos de la SharedPreferences.
         SharedPrefManager.getInstance(context).guardarUsuario(login);//Guardamos los nuevos datos en la SharedPreferences
-        view.changePassOk("Password cambiado correctamente.");
+        view.changePassOk(context.getResources().getString(R.string.PasswordChangeOk));
     }
 
     @Override

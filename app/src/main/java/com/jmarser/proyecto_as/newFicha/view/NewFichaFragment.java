@@ -67,9 +67,7 @@ public class NewFichaFragment extends Fragment implements View.OnClickListener, 
         if (getArguments() != null) {
             alumno = getArguments().getParcelable(Constantes.KEY_ALUMNO);
         }
-        presenter = new NewFichaPresenterImpl(this, new NewFichaInteractorImpl(), getContext());
-
-
+        presenter = new NewFichaPresenterImpl(this, new NewFichaInteractorImpl(getContext()), getContext());
 
         selectFecha = new DatePickerDialog.OnDateSetListener(){
             @Override

@@ -1,6 +1,9 @@
 package com.jmarser.proyecto_as.newFicha.interactor;
 
 
+import android.content.Context;
+
+import com.jmarser.proyecto_as.R;
 import com.jmarser.proyecto_as.api.WebService;
 import com.jmarser.proyecto_as.api.WsApi;
 import com.jmarser.proyecto_as.model.Ficha;
@@ -10,6 +13,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class NewFichaInteractorImpl implements NewFichaInteractor{
+
+    private Context context;
+
+    public NewFichaInteractorImpl(Context context) {
+        this.context = context;
+    }
+
     @Override
     public void saveFicha(Ficha ficha, OnPostNewFichaListener listener) {
         Call<Ficha> call = WebService.getInstance().createWsApi(WsApi.class).saveFicha(ficha);
@@ -19,17 +29,17 @@ public class NewFichaInteractorImpl implements NewFichaInteractor{
                 if(response.code() == 201) {
                     listener.success();
                 }else if(response.code() == 409){
-                    listener.errorFichaExist(response.message());
+                    listener.errorFichaExist(context.getResources().getString(R.string.FichaExist));
                 }else if(response.code() == 400){
-                    listener.errorNewFicha(response.message());
+                    listener.errorNewFicha(context.getResources().getString(R.string.ErrorSaveFicha));
                 }else{
-                    listener.unknowError(response.message());
+                    listener.unknowError(context.getResources().getString(R.string.UnknowError));
                 }
             }
 
             @Override
             public void onFailure(Call<Ficha> call, Throwable t) {
-                listener.unknowError("Error inesperado del servidor.");
+                listener.unknowError(context.getResources().getString(R.string.ErrorUnknowServer));
             }
         });
     }

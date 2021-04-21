@@ -4,10 +4,12 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.Patterns;
 import com.google.android.material.textfield.TextInputLayout;
+import com.jmarser.proyecto_as.R;
 import com.jmarser.proyecto_as.login.interactor.LoginInteractor;
 import com.jmarser.proyecto_as.login.view.LoginView;
 import com.jmarser.proyecto_as.model.Login;
 import com.jmarser.proyecto_as.mySharedPref.SharedPrefManager;
+import com.jmarser.proyecto_as.utils.Constantes;
 import com.jmarser.proyecto_as.utils.EncriptadorAES;
 
 
@@ -19,9 +21,7 @@ public class LoginPresenterImpl implements LoginPresenter, LoginInteractor.onLog
 
     private String email;
     private String password;
-
     private EncriptadorAES encriptador = new EncriptadorAES();
-    private static final String CLAVE_ENCRIPTACION = "gestiondelaspracticas";
 
     public LoginPresenterImpl(LoginView view, LoginInteractor interactor, Context context) {
         this.view = view;
@@ -39,7 +39,7 @@ public class LoginPresenterImpl implements LoginPresenter, LoginInteractor.onLog
         /*guardamos los datos de login en sharedPreferences, con lo que si el usuario no hace logout
         * la proxima vez que inicie la aplicación se cargara desde la pantalla de splash y no tendrá
         * que volver a insertar los datos de login.*/
-        //login.setPassword(encriptador.desencriptar(login.getPassword(), CLAVE_ENCRIPTACION));
+        //login.setPassword(encriptador.desencriptar(login.getPassword(), Constantes.CLAVE_ENCRIPTACION));
         SharedPrefManager.getInstance(context).guardarUsuario(login);
         view.goToView(login.getRol());
 
@@ -65,18 +65,14 @@ public class LoginPresenterImpl implements LoginPresenter, LoginInteractor.onLog
                 if (!TextUtils.isEmpty(password)) {
                     interactor.tryToLogin(email, password, this);
                 } else {
-                    view.showErrorPassword("Indique un password");
+                    view.showErrorPassword(context.getResources().getString(R.string.RequiredField));
                 }
             } else {
-                view.showErrorEmail("Email no válido.");
+                view.showErrorEmail(context.getResources().getString(R.string.IncorrectEmail));
             }
         } else {
-            view.showErrorEmail("Debe indicar un email.");
+            view.showErrorEmail(context.getResources().getString(R.string.RequiredField));
         }
     }
 
-    @Override
-    public void showErrorUser(String mensaje) {
-
-    }
 }

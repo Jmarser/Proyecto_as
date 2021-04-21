@@ -2,6 +2,7 @@ package com.jmarser.proyecto_as.ficha.presenter;
 
 import android.content.Context;
 
+import com.jmarser.proyecto_as.R;
 import com.jmarser.proyecto_as.ficha.interactor.FichaFragmentInteractor;
 import com.jmarser.proyecto_as.ficha.view.FichaFragmentView;
 import com.jmarser.proyecto_as.model.Ficha;
@@ -39,7 +40,7 @@ public class FichaFragmentPresenterImpl implements FichaFragmentPresenter, Ficha
             ficha.setFirmaProf(true);
             interactor.tryUpdateFile(ficha, this);
         }else{
-            view.fileSigned("La ficha ya esta firmada.");
+            view.fileSigned(contexto.getResources().getString(R.string.FichaChecked));
         }
     }
 
@@ -49,7 +50,7 @@ public class FichaFragmentPresenterImpl implements FichaFragmentPresenter, Ficha
             ficha.setFirmaTutor(true);
             interactor.tryUpdateFile(ficha, this);
         }else{
-            view.fileSigned("La ficha ya esta firmada.");
+            view.fileSigned(contexto.getResources().getString(R.string.FichaChecked));
         }
     }
 }

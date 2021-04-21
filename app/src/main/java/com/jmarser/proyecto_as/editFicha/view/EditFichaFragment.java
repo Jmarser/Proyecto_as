@@ -72,7 +72,7 @@ public class EditFichaFragment extends Fragment implements View.OnClickListener,
         if (getArguments() != null) {
             ficha = getArguments().getParcelable(Constantes.KEY_FICHA);
         }
-        presenter = new EditFichaPresenterImpl(getContext(), this, new EditFichaInteractorImpl());
+        presenter = new EditFichaPresenterImpl(getContext(), this, new EditFichaInteractorImpl(getContext()));
 
         selectedFecha = new DatePickerDialog.OnDateSetListener() {
             @Override

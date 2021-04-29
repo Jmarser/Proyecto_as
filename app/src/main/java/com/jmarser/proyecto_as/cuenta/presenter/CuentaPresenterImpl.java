@@ -8,12 +8,15 @@ import com.jmarser.proyecto_as.cuenta.interactor.CuentaInteractor;
 import com.jmarser.proyecto_as.cuenta.view.CuentaView;
 import com.jmarser.proyecto_as.model.Login;
 import com.jmarser.proyecto_as.mySharedPref.SharedPrefManager;
+import com.jmarser.proyecto_as.utils.Constantes;
+import com.jmarser.proyecto_as.utils.EncriptadorAES;
 
 public class CuentaPresenterImpl implements CuentaPresenter, CuentaInteractor.changePasswordListener {
 
     private Context context;
     private CuentaView view;
     private CuentaInteractor interactor;
+    private EncriptadorAES encriptador;
 
     public CuentaPresenterImpl(Context context, CuentaView view, CuentaInteractor interactor) {
         this.context = context;
@@ -40,7 +43,8 @@ public class CuentaPresenterImpl implements CuentaPresenter, CuentaInteractor.ch
                                             Login login = new Login();
                                             login.setId(SharedPrefManager.getInstance(context).getUsuario().getId());
                                             login.setEmail(SharedPrefManager.getInstance(context).getUsuario().getEmail());
-                                            login.setPassword(newPassword.getEditText().getText().toString());
+                                            //tomamos el nuevo password, lo encriptamos y lo cambiamos por el antiguo.
+                                            login.setPassword(encriptador.encriptar(newPassword.getEditText().getText().toString(), Constantes.CLAVE_ENCRIPTACION));
                                             login.setRol(SharedPrefManager.getInstance(context).getUsuario().getRol());
                                             interactor.tryChangePassword(login, this);
                                         } else {

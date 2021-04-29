@@ -12,4 +12,8 @@ public interface AlumnosView {
     void errorTutores(String mensaje);
 
     void unknowError(String mensaje);
+
+    void serverError(String mensaje);
+
+    void userWithoutAuthorization(String mensaje);
 }

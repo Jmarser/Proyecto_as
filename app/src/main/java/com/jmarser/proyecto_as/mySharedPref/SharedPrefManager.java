@@ -2,6 +2,7 @@ package com.jmarser.proyecto_as.mySharedPref;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Base64;
 
 import androidx.security.crypto.EncryptedSharedPreferences;
 import androidx.security.crypto.MasterKeys;
@@ -99,5 +100,12 @@ public class SharedPrefManager {
     /*Método que limpia la SharedPreferences*/
     public void limpiarShared() {
         editor.clear().apply();
+    }
+
+    public String getHeader(){
+        String header = "Basic "
+                + Base64.encodeToString((sharedPreferences.getString(Constantes.SHARED_PREFERENCES_EMAIL, null)+":"+sharedPreferences.getString(Constantes.SHARED_PREFERENCES_PASSWORD, null)).getBytes(), Base64.NO_WRAP);
+
+        return header;
     }
 }

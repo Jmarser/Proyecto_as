@@ -15,14 +15,16 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class WebService {
 
     private static WebService instance;
-    private Retrofit retrofit;
-    private HttpLoggingInterceptor loggingInterceptor;
-    private OkHttpClient.Builder httpClientBuilder;
+    private final Retrofit retrofit;
+    private final HttpLoggingInterceptor loggingInterceptor;
+    private final OkHttpClient.Builder httpClientBuilder;
 
 
     private WebService() {
         loggingInterceptor = new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);
         httpClientBuilder = new OkHttpClient.Builder().addInterceptor(loggingInterceptor);
+
+
 
         retrofit = new Retrofit.Builder()
                 .baseUrl(Constantes.BASE_URL_TERMINAL)

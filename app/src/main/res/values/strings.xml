@@ -18,12 +18,12 @@
     <string name="alumno">Alumno</string>
     <string name="profesor">Profesor</string>
     <string name="tutor">Tutor</string>
-    <string name="firmas">FIRMAS</string>
+    <string name="firmas">VALIDADO</string>
     <string name="no_hay_fichas_disponibles">No hay fichas disponibles</string>
     <string name="logout">Logout</string>
     <string name="fichas_presentadas">Fichas Presentadas</string>
     <string name="horas">Horas</string>
-    <string name="firmado">Firmado</string>
+    <string name="firmado">Validado</string>
     <string name="_27_06_1979">27/06/1979</string>
     <string name="fecha">Fecha</string>
     <string name="no_hay_alumnos_asignados">No hay alumnos asignados</string>
@@ -31,7 +31,7 @@
     <string name="error_al_cargar_el_usuario">Error al cargar el usuario</string>
     <string name="reintentar">Reintentar</string>
     <string name="calendario">Calendario</string>
-    <string name="firma_alumno">Firma Alumno</string>
+    <string name="firma_alumno">Valida Alumno</string>
     <string name="guardar_ficha">Guardar Ficha</string>
     <string name="semana">Semana</string>
     <string name="seleccione_fecha">Seleccione fecha</string>
@@ -78,5 +78,6 @@
     <string name="IncorrectEmail">Email incorrecto</string>
     <string name="ErrorSaveFicha">Error al guardar la ficha</string>
     <string name="SaveFichaOk">Ficha guardada correctamente</string>
+    <string name="user_without_authorization">Usuario sin autorización</string>
 
 </resources>

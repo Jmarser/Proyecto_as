@@ -25,14 +25,16 @@ public class FichasAlumnoInteractorImpl implements FichasAlumnoInteractor{
         Alumno alumno = new Alumno();
         alumno.setEmail(SharedPrefManager.getInstance(context).getUsuario().getEmail());
 
-        Call<Alumno> call = WebService.getInstance().createWsApi(WsApi.class).getAlumno(alumno);
+        Call<Alumno> call = WebService.getInstance().createWsApi(WsApi.class).getAlumno(SharedPrefManager.getInstance(context).getHeader(), alumno);
         call.enqueue(new Callback<Alumno>() {
             @Override
             public void onResponse(Call<Alumno> call, Response<Alumno> response) {
                 if(response.code() == 200){
                     listener.success(response.body());
-                }else if(response.code() == 404){
+                }else if(response.code() == 404) {
                     listener.errorAlumno(context.getResources().getString(R.string.UserNotFound));
+                }else if(response.code() == 401){
+                    listener.unknowError(context.getResources().getString(R.string.user_without_authorization));
                 }else{
                     listener.unknowError(context.getResources().getString(R.string.UnknowError));
                 }
@@ -47,12 +49,14 @@ public class FichasAlumnoInteractorImpl implements FichasAlumnoInteractor{
 
     @Override
     public void getAlumnoById(Long id, OnGetAlumnoListener listener) {
-        Call<Alumno> call = WebService.getInstance().createWsApi(WsApi.class).getAlumnoById(id);
+        Call<Alumno> call = WebService.getInstance().createWsApi(WsApi.class).getAlumnoById(SharedPrefManager.getInstance(context).getHeader(), id);
         call.enqueue(new Callback<Alumno>() {
             @Override
             public void onResponse(Call<Alumno> call, Response<Alumno> response) {
-                if(response.code() == 200){
+                if(response.code() == 200) {
                     listener.success(response.body());
+                }else if(response.code() == 401){
+                    listener.unknowError(context.getResources().getString(R.string.user_without_authorization));
                 }else if(response.code() == 404){
                     listener.errorAlumno(context.getResources().getString(R.string.UserNotFound));
                 }else{

@@ -13,6 +13,10 @@ public interface AlumnosInteractor {
         void errorTutores(String mensaje);
 
         void unkNowError(String mensaje);
+
+        void userWithoutAuthorization(String mensaje);
+
+        void serverError(String mensaje);
     }
 
     void getProfesor(OnGetTutoresListener listener);

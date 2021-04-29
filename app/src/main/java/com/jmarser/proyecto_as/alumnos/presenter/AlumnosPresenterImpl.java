@@ -41,6 +41,16 @@ public class AlumnosPresenterImpl implements AlumnosPresenter, AlumnosInteractor
     }
 
     @Override
+    public void userWithoutAuthorization(String mensaje) {
+        view.userWithoutAuthorization(mensaje);
+    }
+
+    @Override
+    public void serverError(String mensaje) {
+        view.serverError(mensaje);
+    }
+
+    @Override
     public void getProfesor() {
         interactor.getProfesor(this);
     }

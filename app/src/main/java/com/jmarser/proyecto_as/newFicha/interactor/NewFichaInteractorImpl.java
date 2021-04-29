@@ -7,6 +7,7 @@ import com.jmarser.proyecto_as.R;
 import com.jmarser.proyecto_as.api.WebService;
 import com.jmarser.proyecto_as.api.WsApi;
 import com.jmarser.proyecto_as.model.Ficha;
+import com.jmarser.proyecto_as.mySharedPref.SharedPrefManager;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -22,12 +23,14 @@ public class NewFichaInteractorImpl implements NewFichaInteractor{
 
     @Override
     public void saveFicha(Ficha ficha, OnPostNewFichaListener listener) {
-        Call<Ficha> call = WebService.getInstance().createWsApi(WsApi.class).saveFicha(ficha);
+        Call<Ficha> call = WebService.getInstance().createWsApi(WsApi.class).saveFicha(SharedPrefManager.getInstance(context).getHeader(), ficha);
         call.enqueue(new Callback<Ficha>() {
             @Override
             public void onResponse(Call<Ficha> call, Response<Ficha> response) {
                 if(response.code() == 201) {
                     listener.success();
+                }else if(response.code() == 401){
+                    listener.unknowError(context.getResources().getString(R.string.user_without_authorization));
                 }else if(response.code() == 409){
                     listener.errorFichaExist(context.getResources().getString(R.string.FichaExist));
                 }else if(response.code() == 400){

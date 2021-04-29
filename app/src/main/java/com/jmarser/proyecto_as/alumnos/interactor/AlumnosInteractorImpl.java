@@ -27,7 +27,7 @@ public class AlumnosInteractorImpl implements AlumnosInteractor{
         Profesor prof = new Profesor();
         prof.setEmail(SharedPrefManager.getInstance(context).getUsuario().getEmail());
 
-        Call<Profesor> call = WebService.getInstance().createWsApi(WsApi.class).getProfesor(prof);
+        Call<Profesor> call = WebService.getInstance().createWsApi(WsApi.class).getProfesor(SharedPrefManager.getInstance(context).getHeader(), prof);
         call.enqueue(new Callback<Profesor>() {
             @Override
             public void onResponse(Call<Profesor> call, Response<Profesor> response) {
@@ -52,12 +52,14 @@ public class AlumnosInteractorImpl implements AlumnosInteractor{
         Tutor tutor = new Tutor();
         tutor.setEmail(SharedPrefManager.getInstance(context).getUsuario().getEmail());
 
-        Call<Tutor> call = WebService.getInstance().createWsApi(WsApi.class).getTutor(tutor);
+        Call<Tutor> call = WebService.getInstance().createWsApi(WsApi.class).getTutor(SharedPrefManager.getInstance(context).getHeader(), tutor);
         call.enqueue(new Callback<Tutor>() {
             @Override
             public void onResponse(Call<Tutor> call, Response<Tutor> response) {
-                if(response.code()==200){
+                if(response.code()==200) {
                     listener.succcessTutor(response.body());
+                }else if(response.code() == 401){
+                    listener.userWithoutAuthorization(context.getResources().getString(R.string.user_without_authorization));
                 }else if(response.code()==404){
                     listener.errorTutores(context.getResources().getString(R.string.TutorDesconocido));
                 }else{
@@ -67,7 +69,7 @@ public class AlumnosInteractorImpl implements AlumnosInteractor{
 
             @Override
             public void onFailure(Call<Tutor> call, Throwable t) {
-                listener.unkNowError(context.getResources().getString(R.string.ErrorUnknowServer));
+                listener.serverError(context.getResources().getString(R.string.ErrorUnknowServer));
             }
         });
     }

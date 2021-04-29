@@ -7,13 +7,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.jmarser.proyecto_as.R;
 import com.jmarser.proyecto_as.adaptadores.AdaptadorAlumno;
 import com.jmarser.proyecto_as.alumnos.interactor.AlumnosInteractorImpl;
@@ -26,7 +23,6 @@ import com.jmarser.proyecto_as.model.Tutor;
 import com.jmarser.proyecto_as.mySharedPref.SharedPrefManager;
 import com.jmarser.proyecto_as.utils.Constantes;
 import com.jmarser.proyecto_as.utils.NavigationFragment;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import es.dmoral.toasty.Toasty;
@@ -134,6 +130,16 @@ public class AlumnosFragment extends Fragment implements AlumnosView, AdaptadorA
 
     @Override
     public void unknowError(String mensaje) {
+        Toasty.error(getContext(), mensaje, Toasty.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void userWithoutAuthorization(String mensaje) {
+        Toasty.error(getContext(), mensaje, Toasty.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void serverError(String mensaje) {
         Toasty.error(getContext(), mensaje, Toasty.LENGTH_SHORT).show();
     }
 

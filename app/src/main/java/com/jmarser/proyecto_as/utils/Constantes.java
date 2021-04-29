@@ -1,5 +1,9 @@
 package com.jmarser.proyecto_as.utils;
 
+import android.util.Base64;
+
+import com.jmarser.proyecto_as.mySharedPref.SharedPrefManager;
+
 /**
  * Clase que contiene las diferentes constantes y endPoint que usaremos en nuestra aplicacion*/
 
@@ -12,9 +16,12 @@ public class Constantes {
     public static final String SHARED_PREFERENCES_PASSWORD = "user_preferences_password";
     public static final String SHARED_PREFERENCES_ROL = "user_preferences_rol";
 
-    /*Constantes End point Retrofit*/
+    /*Direcciones ip para el webService*/
     public static final String BASE_URL_EMULADOR = "http://10.0.2.2:8080";//usada desde emulador para localhost
-    public static final String BASE_URL_TERMINAL = "http://192.168.1.98:8080";//usada desde terminal para localhost
+    public static final String BASE_URL_TERMINAL = "http://192.168.1.101:8080";//usada desde terminal para localhost
+    public static final String BASE_URL_GENYMOTION = "http://10.0.3.2:8080";//usada desde terminal para localhost
+
+    /*Constantes Endpoint Retrofit*/
     public static final String API = "/api";
     public static final String ENDPOINT_LOGIN_USUARIO = "/login";
     public static final String ENDPOINT_GET_ALUMNO = "/alumno";

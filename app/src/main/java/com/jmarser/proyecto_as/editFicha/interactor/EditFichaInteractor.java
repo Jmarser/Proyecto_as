@@ -12,6 +12,10 @@ public interface EditFichaInteractor {
         void errorFichaExist(String mensaje);
 
         void unknowError(String mensaje);
+
+        void serverError(String mensaje);
+
+        void userWithoutAuthorization(String mensaje);
     }
 
     void EditFicha(Ficha ficha, OnEditFichaInteractor listener);

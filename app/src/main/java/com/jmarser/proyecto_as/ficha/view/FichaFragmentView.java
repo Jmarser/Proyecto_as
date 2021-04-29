@@ -13,4 +13,7 @@ public interface FichaFragmentView {
 
     void fileSigned(String mensaje);
 
+    void serverError(String mensaje);
+
+    void userWithoutAuthorization(String mensaje);
 }

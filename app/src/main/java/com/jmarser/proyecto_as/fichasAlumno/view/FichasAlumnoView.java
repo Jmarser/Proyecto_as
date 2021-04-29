@@ -9,4 +9,8 @@ public interface FichasAlumnoView {
     void errorAlumno(String mensaje);
 
     void unknowError(String mensaje);
+
+    void serverError(String mensaje);
+
+    void userWithoutAuthorization(String mensaje);
 }

@@ -135,6 +135,16 @@ public class FichasAlumnoFragment extends Fragment implements FichasAlumnoView, 
         Toasty.error(getContext(),mensaje, Toasty.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void serverError(String mensaje) {
+        Toasty.error(getContext(),mensaje, Toasty.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void userWithoutAuthorization(String mensaje) {
+        Toasty.error(getContext(),mensaje, Toasty.LENGTH_SHORT).show();
+    }
+
     private void initView() {
         pb_horas_alumno.setMax(Constantes.HORAS_PRACTICAS);
         tv_nombre_alumno.setText(alumno.toString());

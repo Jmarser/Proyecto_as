@@ -35,21 +35,31 @@ public class FichaFragmentPresenterImpl implements FichaFragmentPresenter, Ficha
     }
 
     @Override
+    public void serverError(String mensaje) {
+        view.serverError(mensaje);
+    }
+
+    @Override
+    public void userWithoutAuthorization(String mensaje) {
+        view.userWithoutAuthorization(mensaje);
+    }
+
+    @Override
     public void checkTeacherSignature(Ficha ficha) {
-        if(!ficha.isFirmaProf()){
+        if (!ficha.isFirmaProf()) {
             ficha.setFirmaProf(true);
             interactor.tryUpdateFile(ficha, this);
-        }else{
+        } else {
             view.fileSigned(contexto.getResources().getString(R.string.FichaChecked));
         }
     }
 
     @Override
     public void checkTutorSignature(Ficha ficha) {
-        if(!ficha.isFirmaTutor()){
+        if (!ficha.isFirmaTutor()) {
             ficha.setFirmaTutor(true);
             interactor.tryUpdateFile(ficha, this);
-        }else{
+        } else {
             view.fileSigned(contexto.getResources().getString(R.string.FichaChecked));
         }
     }

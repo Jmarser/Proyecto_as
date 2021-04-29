@@ -13,6 +13,10 @@ public interface FichaFragmentInteractor {
         void errorNotFound(String mensaje);
 
         void unknowError(String mensaje);
+
+        void serverError(String mensaje);
+
+        void userWithoutAuthorization(String mensaje);
     }
 
     void tryUpdateFile(Ficha ficha, OnUpdateFileListener listener);

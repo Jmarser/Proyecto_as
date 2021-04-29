@@ -12,4 +12,8 @@ public interface SplashView {
     void unknowError(String mensaje);
 
     void errorUser(String mensaje);
+
+    void serverError(String mensaje);
+
+    void userWithoutAuthorization(String mensaje);
 }

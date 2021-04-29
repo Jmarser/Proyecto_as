@@ -174,6 +174,16 @@ public class NewFichaFragment extends Fragment implements View.OnClickListener, 
     }
 
     @Override
+    public void serverError(String mensaje) {
+        Toasty.error(getContext(), mensaje, Toasty.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void userWithoutAuthorization(String mensaje) {
+        Toasty.error(getContext(), mensaje, Toasty.LENGTH_SHORT).show();
+    }
+
+    @Override
     public void onSaveInstanceState(Bundle outState){
         super.onSaveInstanceState(outState);
         outState.putParcelable(Constantes.KEY_ALUMNO, alumno);

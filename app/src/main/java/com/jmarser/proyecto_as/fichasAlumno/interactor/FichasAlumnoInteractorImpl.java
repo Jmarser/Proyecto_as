@@ -34,7 +34,7 @@ public class FichasAlumnoInteractorImpl implements FichasAlumnoInteractor{
                 }else if(response.code() == 404) {
                     listener.errorAlumno(context.getResources().getString(R.string.UserNotFound));
                 }else if(response.code() == 401){
-                    listener.unknowError(context.getResources().getString(R.string.user_without_authorization));
+                    listener.userWithoutAuthorization(context.getResources().getString(R.string.user_without_authorization));
                 }else{
                     listener.unknowError(context.getResources().getString(R.string.UnknowError));
                 }
@@ -42,7 +42,7 @@ public class FichasAlumnoInteractorImpl implements FichasAlumnoInteractor{
 
             @Override
             public void onFailure(Call<Alumno> call, Throwable t) {
-                listener.unknowError(context.getResources().getString(R.string.ErrorUnknowServer));
+                listener.serverError(context.getResources().getString(R.string.ErrorUnknowServer));
             }
         });
     }

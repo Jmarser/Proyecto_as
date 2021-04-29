@@ -31,7 +31,7 @@ public class EditFichaInteractorImpl implements EditFichaInteractor{
                 if(response.code() == 200) {
                     listener.success();
                 }else if(response.code() == 401){
-                    listener.unknowError(context.getResources().getString(R.string.user_without_authorization));
+                    listener.userWithoutAuthorization(context.getResources().getString(R.string.user_without_authorization));
                 }else if(response.code() == 404){
                     listener.errorEditFicha(context.getResources().getString(R.string.FichaNotFound));
                 }else if(response.code() == 409) {
@@ -43,7 +43,7 @@ public class EditFichaInteractorImpl implements EditFichaInteractor{
 
             @Override
             public void onFailure(Call<Ficha> call, Throwable t) {
-                listener.unknowError(context.getResources().getString(R.string.ErrorUnknowServer));
+                listener.serverError(context.getResources().getString(R.string.ErrorUnknowServer));
             }
         });
     }

@@ -13,6 +13,10 @@ public interface SplashInteractor {
         void unknownError(String mensaje);
 
         void enabledUser(String mensaje);
+
+        void serverError(String mensaje);
+
+        void userWithoutAuthorization(String mensaje);
     }
 
     void tryToLogin(String email, String password, onLoginFinishedListener listener, Context context);

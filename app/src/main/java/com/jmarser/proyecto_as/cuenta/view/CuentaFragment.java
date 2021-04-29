@@ -94,6 +94,16 @@ public class CuentaFragment extends Fragment implements View.OnClickListener, Cu
         Toasty.error(getContext(), mensaje, Toasty.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void serverError(String mensaje) {
+        Toasty.error(getContext(), mensaje, Toasty.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void userWithoutAuthorization(String mensaje) {
+        Toasty.error(getContext(), mensaje, Toasty.LENGTH_SHORT).show();
+    }
+
     private void limpiarCampos(){
         til_pass_actual.getEditText().setText("");
         til_new_pass.getEditText().setText("");

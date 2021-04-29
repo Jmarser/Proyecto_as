@@ -100,4 +100,14 @@ public class CuentaPresenterImpl implements CuentaPresenter, CuentaInteractor.ch
     public void unknowError(String mensaje) {
         view.unknowError(mensaje);
     }
+
+    @Override
+    public void serverError(String mensaje) {
+        view.serverError(mensaje);
+    }
+
+    @Override
+    public void userWithoutAuthorization(String mensaje) {
+        view.userWithoutAuthorization(mensaje);
+    }
 }

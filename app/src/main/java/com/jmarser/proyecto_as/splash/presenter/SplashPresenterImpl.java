@@ -45,12 +45,22 @@ public class SplashPresenterImpl implements SplashPresenter, SplashInteractor.on
     }
 
     @Override
+    public void serverError(String mensaje) {
+        view.serverError(mensaje);
+    }
+
+    @Override
+    public void userWithoutAuthorization(String mensaje) {
+        view.userWithoutAuthorization(mensaje);
+    }
+
+    @Override
     public void tryToLogin() {
         String email = SharedPrefManager.getInstance(context).getUsuario().getEmail();
         String password = SharedPrefManager.getInstance(context).getUsuario().getPassword();
-        if(!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
+        if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
             interactor.tryToLogin(email, password, this, context);
-        }else{
+        } else {
             errorUser(context.getResources().getString(R.string.unknown_user));//Usuario desconocido.
         }
     }

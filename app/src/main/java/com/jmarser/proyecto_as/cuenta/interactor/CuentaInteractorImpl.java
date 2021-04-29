@@ -30,7 +30,7 @@ public class CuentaInteractorImpl implements CuentaInteractor{
                 if(response.code() == 200) {
                     listener.success(response.body());
                 }else if(response.code() == 401){
-                    listener.unknowError(context.getResources().getString(R.string.user_without_authorization));
+                    listener.userWithoutAuthorization(context.getResources().getString(R.string.user_without_authorization));
                 }else if(response.code() == 404){
                     listener.errorUnknowCuenta(context.getResources().getString(R.string.UserNotFound));
                 }else{
@@ -40,7 +40,7 @@ public class CuentaInteractorImpl implements CuentaInteractor{
 
             @Override
             public void onFailure(Call<Login> call, Throwable t) {
-                listener.errorUnknowCuenta(context.getResources().getString(R.string.ErrorUnknowServer));
+                listener.serverError(context.getResources().getString(R.string.ErrorUnknowServer));
             }
         });
     }

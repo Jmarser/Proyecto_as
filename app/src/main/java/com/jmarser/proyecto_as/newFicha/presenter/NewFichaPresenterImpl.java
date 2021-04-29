@@ -50,6 +50,16 @@ public class NewFichaPresenterImpl implements NewFichaPresenter, NewFichaInterac
     }
 
     @Override
+    public void serverError(String mensaje) {
+        view.serverError(mensaje);
+    }
+
+    @Override
+    public void userWithoutAuthorization(String mensaje) {
+        view.userWithoutAuthorization(mensaje);
+    }
+
+    @Override
     public void validarCampos(Spinner sp_horas, TextView fecha, TextInputLayout descripcion, TextInputLayout observaciones, CheckBox firmado, Alumno alumno) {
         if(sp_horas.getSelectedItemPosition() != 0){
             int horas = Integer.parseInt(sp_horas.getSelectedItem().toString());

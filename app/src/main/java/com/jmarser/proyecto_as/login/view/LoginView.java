@@ -14,4 +14,7 @@ public interface LoginView {
 
     void enabledUser(String mensaje);
 
+    void serverError(String mensaje);
+
+    void userWithoutAuthorization(String mensaje);
 }

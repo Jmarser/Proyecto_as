@@ -12,6 +12,10 @@ public interface LoginInteractor {
         void unknowError(String mensaje);
 
         void enabledUser(String mensaje);
+
+        void serverError(String mensaje);
+
+        void userWithoutAuthorization(String mensaje);
     }
 
     void tryToLogin(String email, String password, onLoginFinishedListener listener);

@@ -43,7 +43,7 @@ public class LoginInteractorImpl implements LoginInteractor {
                 if (response.code() == 200) {//login correcto
                     listener.success(response.body());
                 }else if(response.code() == 401){
-                    listener.unknowError(context.getResources().getString(R.string.user_without_authorization));
+                    listener.userWithoutAuthorization(context.getResources().getString(R.string.user_without_authorization));
                 } else if (response.code() == 409) {//usuario dado de baja
                     listener.enabledUser(context.getResources().getString(R.string.EnabledUser));
                 } else if (response.code() == 404){//error de login
@@ -55,7 +55,7 @@ public class LoginInteractorImpl implements LoginInteractor {
 
             @Override
             public void onFailure(Call<Login> call, Throwable t) {
-                listener.unknowError(context.getResources().getString(R.string.ErrorUnknowServer));
+                listener.serverError(context.getResources().getString(R.string.ErrorUnknowServer));
             }
         });
     }

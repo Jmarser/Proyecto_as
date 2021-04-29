@@ -29,13 +29,13 @@ public class EditFichaPresenterImpl implements EditFichaPresenter, EditFichaInte
 
     @Override
     public void validarCampos(Spinner sp_horas, TextView newFecha, TextInputLayout descripcion, TextInputLayout observaciones, CheckBox firmado, Ficha ficha) {
-        if(sp_horas.getSelectedItemPosition() != 0){
+        if (sp_horas.getSelectedItemPosition() != 0) {
             int horas = Integer.parseInt(sp_horas.getSelectedItem().toString());
-            if(!newFecha.getText().toString().isEmpty()){
-                if(!descripcion.getEditText().getText().toString().isEmpty()){
+            if (!newFecha.getText().toString().isEmpty()) {
+                if (!descripcion.getEditText().getText().toString().isEmpty()) {
                     String descrip = descripcion.getEditText().getText().toString();
-                    if(firmado.isChecked()){
-                        if(ficha != null){
+                    if (firmado.isChecked()) {
+                        if (ficha != null) {
                             Ficha newFicha = new Ficha();
                             newFicha.setId(ficha.getId());
                             newFicha.setAlumnoId(ficha.getAlumnoId());
@@ -46,7 +46,7 @@ public class EditFichaPresenterImpl implements EditFichaPresenter, EditFichaInte
                             newFicha.setFirmaAlumno(firmado.isChecked());
                             newFicha.setFirmaProf(false);
                             newFicha.setFirmaTutor(false);
-                            if(ficha.isFirmaProf() | ficha.isFirmaTutor()){
+                            if (ficha.isFirmaProf() | ficha.isFirmaTutor()) {
                                 AlertDialog.Builder dialog = new AlertDialog.Builder(context)
                                         .setTitle(context.getResources().getString(R.string.ConfirmChange))//"Confirmar modificación"
                                         .setMessage("Al modificar la ficha se borraran las firmas de los tutores.")
@@ -64,27 +64,27 @@ public class EditFichaPresenterImpl implements EditFichaPresenter, EditFichaInte
                                             }
                                         });
                                 dialog.show();
-                            }else {
+                            } else {
                                 editFicha(newFicha);
                             }
-                        }else{
+                        } else {
                             view.showErrorEdit("No hay ficha para editar");
                         }
-                    }else{
+                    } else {
                         view.showErrorFirma("Olvida firmar la ficha.");
                     }
-                }else{
+                } else {
                     view.showErrorDescripcion("Describa los trabajos realizados.");
                 }
-            }else{
+            } else {
                 view.showErrorFecha("Indique una fecha válida.");
             }
-        }else{
+        } else {
             view.showErrorHoras("Debe indicar las horas trabajadas.");
         }
     }
 
-    private void editFicha(Ficha newFicha){
+    private void editFicha(Ficha newFicha) {
         interactor.EditFicha(newFicha, this);
     }
 
@@ -105,7 +105,17 @@ public class EditFichaPresenterImpl implements EditFichaPresenter, EditFichaInte
 
     @Override
     public void unknowError(String mensaje) {
-view.unknowError(mensaje);
+        view.unknowError(mensaje);
+    }
+
+    @Override
+    public void serverError(String mensaje) {
+        view.serverError(mensaje);
+    }
+
+    @Override
+    public void userWithoutAuthorization(String mensaje) {
+        view.userWithoutAuthorization(mensaje);
     }
 
 }

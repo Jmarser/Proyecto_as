@@ -10,6 +10,10 @@ public interface CuentaInteractor {
         void errorUnknowCuenta(String mensaje);
 
         void unknowError(String mensaje);
+
+        void serverError(String mensaje);
+
+        void userWithoutAuthorization(String mensaje);
     }
 
     void tryChangePassword(Login login, changePasswordListener listener);

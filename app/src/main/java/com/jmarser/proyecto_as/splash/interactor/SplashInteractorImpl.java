@@ -36,7 +36,7 @@ public class SplashInteractorImpl implements SplashInteractor{
                 } else if(response.code() ==409) {
                     listener.enabledUser(context.getResources().getString(R.string.EnabledUser));
                 }else if(response.code() == 401){
-                    listener.unknownError(context.getResources().getString(R.string.user_without_authorization));
+                    listener.userWithoutAuthorization(context.getResources().getString(R.string.user_without_authorization));
                 }else{
                     listener.unknownError(context.getResources().getString(R.string.unknown_error));
                 }
@@ -44,7 +44,7 @@ public class SplashInteractorImpl implements SplashInteractor{
 
             @Override
             public void onFailure(Call<Login> call, Throwable t) {
-                listener.unknownError(context.getResources().getString(R.string.unknown_connection_failure));
+                listener.serverError(context.getResources().getString(R.string.unknown_connection_failure));
             }
         });
     }

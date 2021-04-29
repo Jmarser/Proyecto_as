@@ -99,6 +99,16 @@ public class LoginActivity extends AppCompatActivity implements LoginView, View.
                 }).show();
     }
 
+    @Override
+    public void serverError(String mensaje) {
+        Toasty.error(this, mensaje, Toasty.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void userWithoutAuthorization(String mensaje) {
+        Toasty.error(this, mensaje, Toasty.LENGTH_SHORT).show();
+    }
+
     private void limpiarCampos() {
         til_email.getEditText().setText("");
         til_password.getEditText().setText("");

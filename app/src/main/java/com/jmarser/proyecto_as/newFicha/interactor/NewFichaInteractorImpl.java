@@ -30,7 +30,7 @@ public class NewFichaInteractorImpl implements NewFichaInteractor{
                 if(response.code() == 201) {
                     listener.success();
                 }else if(response.code() == 401){
-                    listener.unknowError(context.getResources().getString(R.string.user_without_authorization));
+                    listener.userWithoutAuthorization(context.getResources().getString(R.string.user_without_authorization));
                 }else if(response.code() == 409){
                     listener.errorFichaExist(context.getResources().getString(R.string.FichaExist));
                 }else if(response.code() == 400){
@@ -42,7 +42,7 @@ public class NewFichaInteractorImpl implements NewFichaInteractor{
 
             @Override
             public void onFailure(Call<Ficha> call, Throwable t) {
-                listener.unknowError(context.getResources().getString(R.string.ErrorUnknowServer));
+                listener.serverError(context.getResources().getString(R.string.ErrorUnknowServer));
             }
         });
     }

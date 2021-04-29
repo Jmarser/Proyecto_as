@@ -35,6 +35,16 @@ public class FichasAlumnoPresenterImpl implements FichasAlumnoPresenter, FichasA
     }
 
     @Override
+    public void serverError(String mensaje) {
+        view.serverError(mensaje);
+    }
+
+    @Override
+    public void userWithoutAuthorization(String mensaje) {
+        view.userWithoutAuthorization(mensaje);
+    }
+
+    @Override
     public void getAlumno() {
         interactor.getAlumno(this);
     }

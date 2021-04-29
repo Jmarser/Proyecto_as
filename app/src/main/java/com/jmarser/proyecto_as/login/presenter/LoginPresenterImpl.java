@@ -56,6 +56,16 @@ public class LoginPresenterImpl implements LoginPresenter, LoginInteractor.onLog
     }
 
     @Override
+    public void serverError(String mensaje) {
+        view.serverError(mensaje);
+    }
+
+    @Override
+    public void userWithoutAuthorization(String mensaje) {
+        view.userWithoutAuthorization(mensaje);
+    }
+
+    @Override
     public void validarCredenciales(TextInputLayout til_email, TextInputLayout til_password) {
         email = til_email.getEditText().getText().toString().trim();
         password = til_password.getEditText().getText().toString().trim();

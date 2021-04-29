@@ -12,6 +12,10 @@ public interface NewFichaInteractor {
         void errorFichaExist(String mensaje);
 
         void unknowError(String mensaje);
+
+        void serverError(String mensaje);
+
+        void userWithoutAuthorization(String mensaje);
     }
 
     void saveFicha(Ficha ficha, OnPostNewFichaListener listener);

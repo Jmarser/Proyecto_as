@@ -29,7 +29,7 @@ public class FichaFragmentInteractorImpl implements FichaFragmentInteractor{
                 if(response.code() == 200) {
                     listener.successUpdate(response.body());
                 }else if(response.code() == 401){
-                    listener.unknowError(context.getResources().getString(R.string.user_without_authorization));
+                    listener.userWithoutAuthorization(context.getResources().getString(R.string.user_without_authorization));
                 }else if(response.code() == 404){
                     listener.errorNotFound(context.getResources().getString(R.string.FichaNotFound));
                 }else{
@@ -39,7 +39,7 @@ public class FichaFragmentInteractorImpl implements FichaFragmentInteractor{
 
             @Override
             public void onFailure(Call<Ficha> call, Throwable t) {
-                listener.unknowError(context.getResources().getString(R.string.ErrorUnknowServer));
+                listener.serverError(context.getResources().getString(R.string.ErrorUnknowServer));
             }
         });
     }

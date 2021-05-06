@@ -13,7 +13,10 @@
             android:id="@+id/menu_cuenta"
             android:icon="@drawable/ic_settings_24"
             android:title="Ajustes" />
-
+        <item
+            android:id="@+id/menu_pdf"
+            android:icon="@drawable/ic_as_pdf_24"
+            android:title="Generar PDF" />
 
     </group>
     <item android:title="Acerca de...">

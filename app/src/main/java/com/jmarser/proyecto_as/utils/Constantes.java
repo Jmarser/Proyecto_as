@@ -18,7 +18,7 @@ public class Constantes {
 
     /*Direcciones ip para el webService*/
     public static final String BASE_URL_EMULADOR = "http://10.0.2.2:8080";//usada desde emulador para localhost
-    public static final String BASE_URL_TERMINAL = "http://192.168.1.101:8080";//usada desde terminal para localhost
+    public static final String BASE_URL_TERMINAL = "http://192.168.1.107:8080";//usada desde terminal para localhost
     public static final String BASE_URL_GENYMOTION = "http://10.0.3.2:8080";//usada desde terminal para localhost
 
     /*Constantes Endpoint Retrofit*/
@@ -46,4 +46,7 @@ public class Constantes {
 
     /*Clave de encriptacion AES*/
     public static final String CLAVE_ENCRIPTACION = "gestiondelaspracticas";
+
+    /*Codigos para los permisos*/
+    public static final int CODE_WRITE = 100;
 }

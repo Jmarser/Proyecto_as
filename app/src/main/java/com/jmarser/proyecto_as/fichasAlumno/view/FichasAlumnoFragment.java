@@ -1,21 +1,18 @@
 package com.jmarser.proyecto_as.fichasAlumno.view;
 
-import android.os.Bundle;
 
+import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.jmarser.proyecto_as.R;
 import com.jmarser.proyecto_as.adaptadores.AdaptadorFicha;
@@ -29,7 +26,6 @@ import com.jmarser.proyecto_as.mySharedPref.SharedPrefManager;
 import com.jmarser.proyecto_as.newFicha.view.NewFichaFragment;
 import com.jmarser.proyecto_as.utils.Constantes;
 import com.jmarser.proyecto_as.utils.NavigationFragment;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import es.dmoral.toasty.Toasty;

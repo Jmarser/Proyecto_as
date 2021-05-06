@@ -60,7 +60,7 @@
     <string name="portfolio">Portfolio:</string>
     <string name="www_portfolio_com">www.portfolio.com</string>
     <string name="descripci_n_de_la_app">Descripción de la app</string>
-    <string name="descripcionApp">Aplicación para la creación, edición y almacenamiento de las fichas diarias a realizar durante la FCT.<br/>Las fichas son almacenadas en una base de datos remota gestionada por una API Rest.<br/>Las fichas son creadas y editadas por los alumnos y firmadas por los profesores.</string>
+    <string name="descripcionApp">Aplicación para la creación, edición y almacenamiento de las fichas diarias a realizar durante la FCT.<br />Las fichas son almacenadas en una base de datos remota gestionada por una API Rest.<br />Las fichas son creadas y editadas por los alumnos y firmadas por los profesores.</string>
     <string name="ErrorUnknowServer">Error desconocido del servidor.</string>
     <string name="UnknowError">Ocurrio un error desconocido</string>
     <string name="TutorDesconocido">Tutor desconocido</string>
@@ -79,5 +79,7 @@
     <string name="ErrorSaveFicha">Error al guardar la ficha</string>
     <string name="SaveFichaOk">Ficha guardada correctamente</string>
     <string name="user_without_authorization">Usuario sin autorización</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

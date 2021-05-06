@@ -27,7 +27,7 @@ public class WebService {
 
 
         retrofit = new Retrofit.Builder()
-                .baseUrl(Constantes.BASE_URL_TERMINAL)
+                .baseUrl(Constantes.BASE_URL_GENYMOTION)
                 .client(httpClientBuilder.build())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();

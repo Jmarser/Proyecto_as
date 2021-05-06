@@ -9,7 +9,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.Manifest;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -19,6 +22,8 @@ import com.jmarser.proyecto_as.alumnos.view.AlumnosFragment;
 import com.jmarser.proyecto_as.cuenta.view.CuentaFragment;
 import com.jmarser.proyecto_as.errorUsuario.ErrorUsuarioFragment;
 import com.jmarser.proyecto_as.fichasAlumno.view.FichasAlumnoFragment;
+import com.jmarser.proyecto_as.generarPDF.presenter.GenerarPDFPresenter;
+import com.jmarser.proyecto_as.generarPDF.view.GenerarPDFFragment;
 import com.jmarser.proyecto_as.login.view.LoginActivity;
 import com.jmarser.proyecto_as.mySharedPref.SharedPrefManager;
 import com.jmarser.proyecto_as.utils.Constantes;
@@ -27,8 +32,10 @@ import com.jmarser.proyecto_as.utils.NavigationFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import es.dmoral.toasty.Toasty;
 
-public class PrincipalActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+
+public class PrincipalActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     @BindView(R.id.toolbar_base)
     Toolbar toolbar;
@@ -61,7 +68,7 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
         nav_view.setNavigationItemSelectedListener(this);//funcionalidad a los botones del menu lateral
 
         //en el caso de que se gire la pantalla volvemos al fragment principal
-        if(savedInstanceState == null){
+        if (savedInstanceState == null) {
             initFragment(SharedPrefManager.getInstance(this).getUsuario().getRol());
             nav_view.setCheckedItem(R.id.menu_home);
         }
@@ -78,13 +85,13 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
         } else if (rol.equalsIgnoreCase(Constantes.ROL_TUTOR)) {
             getSupportActionBar().setTitle(Constantes.ROL_TUTOR.toUpperCase());
             NavigationFragment.addFragment(getSupportFragmentManager(), AlumnosFragment.newInstance(), AlumnosFragment.class.getName());
-        }else{
+        } else {
             NavigationFragment.addFragment(getSupportFragmentManager(), ErrorUsuarioFragment.newInstance(), ErrorUsuarioFragment.class.getName());
         }
     }
 
     /*Método que realiza el cierre de sesión de la aplicación limpiando el contenido de la sharedPreferences
-    * y devolviendos a la actividad de login*/
+     * y devolviendos a la actividad de login*/
     private void logout() {
         final AlertDialog.Builder dialogo = new AlertDialog.Builder(this);
         dialogo.setTitle(getResources().getString(R.string.salir))//salir
@@ -103,7 +110,7 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.menu_home:
                 initFragment(SharedPrefManager.getInstance(this).getUsuario().getRol());
                 break;
@@ -114,6 +121,16 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
             case R.id.menu_desarrollador:
                 getSupportActionBar().setTitle("Acerca de...");
                 NavigationFragment.replaceFragment(getSupportFragmentManager(), AcercaDeFragment.newInstance(), AcercaDeFragment.class.getName());
+                break;
+            case R.id.menu_pdf:
+                /*Solo el alumno puede generar el PDF, por lo que hacemos una comprobación*/
+                if (SharedPrefManager.getInstance(this).getUsuario().getRol().equalsIgnoreCase(Constantes.ROL_ALUMNO)) {
+                    if(validarPermisos()){
+                        NavigationFragment.addFragment(getSupportFragmentManager(), GenerarPDFFragment.newInstance(),GenerarPDFFragment.class.getName());
+                    }
+                } else {
+                    Toasty.error(this, "No puede generar el PDF", Toasty.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.menu_logout:
                 logout();
@@ -128,7 +145,7 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(toggle.onOptionsItemSelected(item)){
+        if (toggle.onOptionsItemSelected(item)) {
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -136,9 +153,9 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
 
     @Override
     public void onBackPressed() {
-        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
-        }else {
+        } else {
             super.onBackPressed();
         }
     }
@@ -149,4 +166,45 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
         toggle.syncState();
     }
 
+    private boolean validarPermisos() {
+        /*comprobamos la version del android, si es menor de M, no hace falta darle permisos basta
+        solo con el permiso del manifiesto*/
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            return true;
+        }
+        //comprobamos si ya tenemos permiso de escritura
+        if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            return true;
+        }
+        if (shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            solicitarPermisos();
+        } else {
+            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, Constantes.CODE_WRITE);
+        }
+        return false;
+    }
+
+    private void solicitarPermisos() {
+        AlertDialog.Builder dialogo = new AlertDialog.Builder(this);
+        dialogo.setTitle("Permisos desactivados")
+                .setMessage("Debe aceptar los permisos para generar el PDF.")
+                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, Constantes.CODE_WRITE);
+                    }
+                });
+        dialogo.show();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == Constantes.CODE_WRITE) {
+            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                //generamos el PDF
+                NavigationFragment.addFragment(getSupportFragmentManager(), GenerarPDFFragment.newInstance(),GenerarPDFFragment.class.getName());
+            }
+        }
+    }
 }

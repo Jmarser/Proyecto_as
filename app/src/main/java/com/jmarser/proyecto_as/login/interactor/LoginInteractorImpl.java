@@ -2,6 +2,7 @@ package com.jmarser.proyecto_as.login.interactor;
 
 
 import android.content.Context;
+import android.util.Base64;
 
 import com.jmarser.proyecto_as.R;
 import com.jmarser.proyecto_as.api.WebService;
@@ -29,6 +30,9 @@ public class LoginInteractorImpl implements LoginInteractor {
     public void tryToLogin(String email, String password, onLoginFinishedListener listener) {
         EncriptadorAES encriptador = new EncriptadorAES();
 
+        String header = "Basic "
+                + Base64.encodeToString((email+":"+password).getBytes(), Base64.NO_WRAP);
+
         Login login = new Login();
         login.setEmail(email);
         //login.setPassword(encriptador.encriptar(password, Constantes.CLAVE_ENCRIPTACION));
@@ -36,7 +40,7 @@ public class LoginInteractorImpl implements LoginInteractor {
 
         /*hacemos una llamada a nuestro webService genérico con patron singleton y en la misma linea
         * llamamos al método que necesitamos, en este caso login*/
-        Call<Login> call = WebService.getInstance().createWsApi(WsApi.class).login(SharedPrefManager.getInstance(context).getHeader(), login);
+        Call<Login> call = WebService.getInstance().createWsApi(WsApi.class).login(header, login);
         call.enqueue(new Callback<Login>() {
             @Override
             public void onResponse(Call<Login> call, Response<Login> response) {

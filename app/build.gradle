@@ -15,12 +15,19 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    packagingOptions{
+        exclude 'com/itextpdf/io/font/cmap_info.txt'
+        exclude 'com/itextpdf/io/font/cmap/*'
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -57,4 +64,6 @@ dependencies {
     //implementacion para los toast personalizados
     implementation 'com.github.GrenderG:Toasty:1.5.0'
 
+    //implementación para generar los PDF's
+    implementation 'com.itextpdf:itext7-core:7.1.3'
 }

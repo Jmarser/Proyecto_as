@@ -74,12 +74,25 @@ public class GenerarPDFFragment extends Fragment implements GenerarPDFView {
         this.alumno = alumno;
 
         try {
-            crearPdf();
+            if(validarFichas()) {
+                crearPdf();
+            }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             Toasty.error(getContext(), "Error al crear el PDF", Toasty.LENGTH_SHORT).show();
         }
 
+    }
+
+    /*Validamos que todas las fichas que se encuentren creadas, esten validadas por el profesor y el tutor*/
+    private boolean validarFichas(){
+
+            for(int i = 0; i<alumno.getFichas().size(); i++){
+                if(!alumno.getFichas().get(i).isFirmaProf() || !alumno.getFichas().get(i).isFirmaTutor()){
+                    return false;
+                }
+            }
+            return true;
     }
 
     @Override

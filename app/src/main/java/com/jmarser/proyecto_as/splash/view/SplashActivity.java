@@ -92,11 +92,13 @@ public class SplashActivity extends AppCompatActivity implements SplashView {
     @Override
     public void serverError(String mensaje) {
         Toasty.error(this, mensaje, Toasty.LENGTH_SHORT).show();
+        goToLogin();
     }
 
     @Override
     public void userWithoutAuthorization(String mensaje) {
         Toasty.error(this, mensaje, Toasty.LENGTH_SHORT).show();
+        goToLogin();
     }
 
     /*Comprobamos que haya un usuario guardado en la sharedpreferences e intentamos hacer login, de no

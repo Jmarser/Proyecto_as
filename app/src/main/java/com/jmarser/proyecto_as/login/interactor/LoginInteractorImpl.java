@@ -29,14 +29,16 @@ public class LoginInteractorImpl implements LoginInteractor {
     @Override
     public void tryToLogin(String email, String password, onLoginFinishedListener listener) {
         EncriptadorAES encriptador = new EncriptadorAES();
+        //encriptamos el password
+        String clave_encriptada = encriptador.encriptar(password, Constantes.CLAVE_ENCRIPTACION);
 
+        //creamos el header para la autentificación del servidor
         String header = "Basic "
-                + Base64.encodeToString((email+":"+password).getBytes(), Base64.NO_WRAP);
+                + Base64.encodeToString((email+":"+clave_encriptada).getBytes(), Base64.NO_WRAP);
 
         Login login = new Login();
         login.setEmail(email);
-        //login.setPassword(encriptador.encriptar(password, Constantes.CLAVE_ENCRIPTACION));
-        login.setPassword(password);
+        login.setPassword(clave_encriptada);
 
         /*hacemos una llamada a nuestro webService genérico con patron singleton y en la misma linea
         * llamamos al método que necesitamos, en este caso login*/

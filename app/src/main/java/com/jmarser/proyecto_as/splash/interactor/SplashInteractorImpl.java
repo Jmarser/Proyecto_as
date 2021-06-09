@@ -10,6 +10,8 @@ import com.jmarser.proyecto_as.model.Alumno;
 import com.jmarser.proyecto_as.model.Login;
 import com.jmarser.proyecto_as.model.Usuario;
 import com.jmarser.proyecto_as.mySharedPref.SharedPrefManager;
+import com.jmarser.proyecto_as.utils.Constantes;
+import com.jmarser.proyecto_as.utils.EncriptadorAES;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -19,6 +21,7 @@ public class SplashInteractorImpl implements SplashInteractor{
 
     @Override
     public void tryToLogin(String email, String password, onLoginFinishedListener listener, Context context) {
+
         Login login = new Login();
         login.setEmail(email);
         login.setPassword(password);

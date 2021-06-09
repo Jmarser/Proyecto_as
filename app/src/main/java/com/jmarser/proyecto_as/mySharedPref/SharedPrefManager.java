@@ -11,6 +11,7 @@ import com.jmarser.proyecto_as.model.Alumno;
 import com.jmarser.proyecto_as.model.Login;
 import com.jmarser.proyecto_as.model.Usuario;
 import com.jmarser.proyecto_as.utils.Constantes;
+import com.jmarser.proyecto_as.utils.EncriptadorAES;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -102,7 +103,9 @@ public class SharedPrefManager {
         editor.clear().apply();
     }
 
+    /*Método con el que obtenemos el header de autentificación para el acceso de a la api Rest*/
     public String getHeader(){
+
         String header = "Basic "
                 + Base64.encodeToString((sharedPreferences.getString(Constantes.SHARED_PREFERENCES_EMAIL, null)+":"+sharedPreferences.getString(Constantes.SHARED_PREFERENCES_PASSWORD, null)).getBytes(), Base64.NO_WRAP);
 

@@ -51,4 +51,6 @@ public interface WsApi {
     //Llamada de modificación del password del usuario.
     @PUT(Constantes.API + Constantes.ENDPOINT_UPDATE_PASS)
     Call<Login> modificarPass(@Header("Authorization")String user, @Path("id")Long id, @Body Login login);
+
+
 }

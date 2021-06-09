@@ -75,6 +75,7 @@ public class NewFichaPresenterImpl implements NewFichaPresenter, NewFichaInterac
                             ficha.setDescripcion(descrip);
                             ficha.setObservaciones(observaciones.getEditText().getText().toString());
                             ficha.setFirmaAlumno(firmado.isChecked());
+                            ficha.setCiclo(alumno.getCiclo());
                             interactor.saveFicha(ficha, this);
                         }else{
                             view.showErrorAlumno("No hay alumno asignado a la ficha");

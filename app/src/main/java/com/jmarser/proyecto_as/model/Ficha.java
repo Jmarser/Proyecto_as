@@ -17,11 +17,12 @@ public class Ficha implements Parcelable {
     private boolean firmaTutor;
     private int horas;
     private String fecha;
+    private String ciclo;
 
     public Ficha() {
     }
 
-    public Ficha(Long id, String descripcion, String observaciones, Long alumnoId, boolean firmaAlumno, boolean firmaProf, boolean firmaTutor, int horas, String fecha) {
+    public Ficha(Long id, String descripcion, String observaciones, Long alumnoId, boolean firmaAlumno, boolean firmaProf, boolean firmaTutor, int horas, String fecha, String ciclo) {
         this.id = id;
         this.descripcion = descripcion;
         this.observaciones = observaciones;
@@ -31,6 +32,7 @@ public class Ficha implements Parcelable {
         this.firmaTutor = firmaTutor;
         this.horas = horas;
         this.fecha = fecha;
+        this.ciclo = ciclo;
     }
 
     protected Ficha(Parcel in) {
@@ -51,6 +53,7 @@ public class Ficha implements Parcelable {
         firmaTutor = in.readByte() != 0;
         horas = in.readInt();
         fecha = in.readString();
+        ciclo = in.readString();
     }
 
     public static final Creator<Ficha> CREATOR = new Creator<Ficha>() {
@@ -156,6 +159,7 @@ public class Ficha implements Parcelable {
         dest.writeByte((byte) (firmaTutor ? 1 : 0));
         dest.writeInt(horas);
         dest.writeString(fecha);
+        dest.writeString(ciclo);
     }
 
     public Long getAlumnoId() {
@@ -164,5 +168,13 @@ public class Ficha implements Parcelable {
 
     public void setAlumnoId(Long alumnoId) {
         this.alumnoId = alumnoId;
+    }
+
+    public String getCiclo() {
+        return ciclo;
+    }
+
+    public void setCiclo(String ciclo) {
+        this.ciclo = ciclo;
     }
 }

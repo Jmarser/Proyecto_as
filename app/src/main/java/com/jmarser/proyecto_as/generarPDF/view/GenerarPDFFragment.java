@@ -76,6 +76,8 @@ public class GenerarPDFFragment extends Fragment implements GenerarPDFView {
         try {
             if(validarFichas()) {
                 crearPdf();
+            }else{
+                Toasty.error(getContext(), "Hay fichas sin validar.", Toasty.LENGTH_SHORT).show();
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();

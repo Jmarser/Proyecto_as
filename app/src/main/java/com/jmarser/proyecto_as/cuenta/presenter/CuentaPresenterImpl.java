@@ -35,7 +35,7 @@ public class CuentaPresenterImpl implements CuentaPresenter, CuentaInteractor.ch
                         if (newPassword.getEditText().getText().length() >= 6) {
                             if (newPasswordRep.getEditText().getText().length() >= 6) {
                                 //comprobamos que el password actual coincida con el de inicio de sesion
-                                if (passwordActual.getEditText().getText().toString().equals(SharedPrefManager.getInstance(context).getUsuario().getPassword())) {
+                                if (passwordActual.getEditText().getText().toString().equals(encriptador.desencriptar(SharedPrefManager.getInstance(context).getUsuario().getPassword(),Constantes.CLAVE_ENCRIPTACION))) {
                                     //comprobamos que los nuevos password coinciden
                                     if (newPassword.getEditText().getText().toString().equals(newPasswordRep.getEditText().getText().toString())) {
                                         //Comprobamos que el nuevo password no sea el mismo que el antiguo
